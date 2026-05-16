@@ -10,3 +10,17 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 50px;
 }
+
+header {
+    background: #333;
+    color: hsl(256, 98%, 25%);
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background: #333;
+    color: hsl(340, 98%, 25%);
+    padding: 20px;
+    margin-top: 50px;
+}
