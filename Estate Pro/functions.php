@@ -4,6 +4,16 @@
  * * Ми створюємо функцію, яка каже WordPress, які стандартні можливості 
  * двигуна наша тема взагалі підтримує.
  */
+
+
+function estate_pro_enqueue_assets() {
+    wp_enqueue_style( 'estate-pro-style', get_stylesheet_uri(), array(), '1.0' );
+    // При потребі підключіть скрипти так:
+    // wp_enqueue_script( 'estate-pro-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'estate_pro_enqueue_assets' );
+
+
 function estate_pro_theme_setup() {
     
     // Вмикаємо підтримку "Featured Image" (головне фото для постів/квартир)

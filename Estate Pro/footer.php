@@ -1,7 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<footer class="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Estate Pro. Все чисто і за стандартами.</p>
+        </div>
+    </footer>
+
+    <?php wp_footer(); // Порт для службових скриптів адмінки ?>
+</body>
+</html>
