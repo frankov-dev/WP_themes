@@ -57,3 +57,19 @@ function estate_pro_register_property_type() {
 add_action( 'init', 'estate_pro_register_property_type' );
 
 
+/**
+ * Реєстрація кастомного Gutenberg-блока через ACF
+ */
+function estate_pro_register_my_first_block() {
+    if ( function_exists('acf_register_block_type') ) {
+        acf_register_block_type( array(
+            'name'            => 'agent_card',               // ID блока
+            'title'           => 'Картка Агента',            // Назва в меню "+"
+            'description'     => 'Блок для виведення контактів ріелтора.',
+            'render_template' => 'template-parts/blocks/agent-card.php', // Де буде лежати його верстка
+            'category'        => 'formatting',
+            'icon'            => 'admin-users',              // Іконка в адмінці
+        ) );
+    }
+}
+add_action('acf/init', 'estate_pro_register_my_first_block');
