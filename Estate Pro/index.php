@@ -18,7 +18,20 @@
                 <article class="property-card">
                     
                     <div class="property-image">
-                        <?php the_post_thumbnail('medium'); ?>
+                        <?php 
+                        // Перевіряємо, чи є в поста офіційне "Featured Image"
+                        if ( has_post_thumbnail() ) {
+                            
+                            the_post_thumbnail('medium'); 
+                            
+                        } else {
+                            
+                            // Якщо фото немає — підтягуємо динамічне фото з Lorem Picsum.
+                            // Додавання ?random= і ID поста гарантує, що у кожної картки буде СВОЯ унікальна фотка!
+                            echo '<img src="https://picsum.photos/800/600?random=' . get_the_ID() . '" alt="' . esc_attr( get_the_title() ) . '">';
+                            
+                        }
+                        ?>
                     </div>
 
                     <div class="property-info">
