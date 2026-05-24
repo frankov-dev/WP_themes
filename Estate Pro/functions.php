@@ -55,3 +55,5 @@ function estate_pro_register_property_type() {
 }
 // Прив'язуємо цю логіку на подію 'init' (коли система повністю готова)
 add_action( 'init', 'estate_pro_register_property_type' );
+
+
