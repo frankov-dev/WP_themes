@@ -9,9 +9,15 @@
 <body <?php body_class(); ?>>
     <header class="header">
         <div class="container">
-            <h1 class="site-title"><?php bloginfo('name'); ?></h1>
             <nav class="site-navigation">
-                <?php wp_nav_menu(array('theme_location' => 'primary')); ?>
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'primary',
+                    'container' => false,
+                    'menu_class' => 'header-menu',
+                    'fallback_cb' => false,
+                ));
+                ?>
             </nav>
         </div>
     </header>
