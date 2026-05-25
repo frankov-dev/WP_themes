@@ -2,7 +2,7 @@
 Theme Name: Estate Pro
 Description: Clean & Professional Theme.
 Version: 1.0
-Author: Modern Dev
+Author: Frankov
 */
 
 /* ==========================================================================
@@ -12,7 +12,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Roboto, sans-serif;
-    background-color: #f5f7fa; /* Легкий сірий фон для всього сайту */
+    background-color: #f5f7fa;
     color: #333333;
 }
 
@@ -21,18 +21,18 @@ body {
    ========================================================================== */
 .site-header {
     background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Легка тінь знизу */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 .header-container {
     max-width: 1200px;
-    margin: 0 auto; /* Центруємо контент по центру екрану */
+    margin: 0 auto;
     padding: 20px;
 }
 .site-logo {
     font-size: 24px;
     font-weight: 700;
-    color: #1a73e8; /* Професійний синій колір */
-    text-decoration: none; /* Прибираємо підкреслення посилання */
+    color: #1a73e8;
+    text-decoration: none;
 }
 
 /* ==========================================================================
@@ -40,7 +40,7 @@ body {
    ========================================================================== */
 .main-catalog {
     max-width: 1200px;
-    margin: 40px auto; /* Тиснемо зверху/знизу по 40px, з боків центруємо */
+    margin: 40px auto;
     padding: 0 20px;
 }
 .catalog-title {
@@ -48,13 +48,10 @@ body {
     color: #202124;
     margin-bottom: 30px;
 }
-
-/* Створюємо магічну сітку */
 .properties-grid {
     display: grid;
-    /* Розбий простір на 3 рівні колонки за замовчуванням */
     grid-template-columns: repeat(3, 1fr); 
-    gap: 30px; /* Відстань МІЖ картками */
+    gap: 30px;
 }
 
 /* ==========================================================================
@@ -62,36 +59,28 @@ body {
    ========================================================================== */
 .property-card {
     background-color: #ffffff;
-    border-radius: 12px; /* Закруглені кути */
-    overflow: hidden; /* Щоб картинка не вилазила за закруглені кути */
+    border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease; /* Плавність анімації */
+    transition: transform 0.3s ease;
 }
-
-/* Ефект при наведенні мишкою */
 .property-card:hover {
-    transform: translateY(-5px); /* Картка плавно підстрибує вгору */
+    transform: translateY(-5px);
 }
-
-/* Налаштування картинки всередині картки */
 .property-image img {
     width: 100%;
     height: 220px;
-    object-fit: cover; /* Картинка масштабується, не стискаючись */
+    object-fit: cover;
     display: block;
 }
-
 .property-info {
-    padding: 20px; /* Внутрішні відступи для тексту */
+    padding: 20px;
 }
-
 .property-title {
     margin: 0 0 15px 0;
     font-size: 18px;
     color: #202124;
 }
-
-/* Стилізація кнопки */
 .property-link {
     display: block;
     background-color: #1a73e8;
@@ -104,7 +93,7 @@ body {
     transition: background-color 0.2s ease;
 }
 .property-link:hover {
-    background-color: #1557b0; /* Темніє при наведенні */
+    background-color: #1557b0;
 }
 
 /* ==========================================================================
@@ -126,7 +115,6 @@ body {
     max-width: 800px;
     margin: 0 auto;
 }
-
 .back-to-catalog {
     color: #2c3e50;
     text-decoration: none;
@@ -135,15 +123,12 @@ body {
 .back-to-catalog:hover {
     text-decoration: underline;
 }
-
 .single-property-title {
     font-size: 36px;
     margin: 20px 0;
     color: #202124;
     line-height: 1.2;
 }
-
-/* Обмеження висоти та кадрування великого фото об'єкта */
 .single-property-image img {
     width: 100%;
     height: 450px;
@@ -152,10 +137,65 @@ body {
     display: block;
     margin-bottom: 30px;
 }
-
-/* Блок з характеристиками (Flexbox) */
 .property-details-block {
     background: #ffffff;
     padding: 25px;
     border-radius: 12px;
-    box-shadow
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    margin-bottom: 30px;
+}
+.details-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.spec-item {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+.price-item {
+    color: #1a73e8;
+    font-weight: bold;
+    font-size: 22px;
+}
+.price-period {
+    font-size: 15px;
+    color: #7f8c8d;
+    font-weight: normal;
+}
+.parking-yes { color: #2ecc71; font-weight: bold; }
+.parking-no { color: #e74c3c; }
+
+.full-description {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #3f4043;
+}
+
+/* ==========================================================================
+   7. АДАПТИВНІСТЬ (RESPONSIVE DESIGN) 
+   ========================================================================== */
+@media (max-width: 992px) {
+    .properties-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .properties-grid {
+        grid-template-columns: 1fr;
+    }
+    .single-property-title {
+        font-size: 28px;
+    }
+    .single-property-image img {
+        height: 250px;
+    }
+    .property-details-block {
+        padding: 15px;
+    }
+    .spec-item {
+        font-size: 16px;
+    }
+}

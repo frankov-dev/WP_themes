@@ -28,7 +28,7 @@
                 $offer_type = get_field('property_offer_type'); 
                 ?>
                 <p class="spec-item price-item">
-                     Vogt 💰 <?php the_field('property_price'); ?> $
+                    💰 <?php the_field('property_price'); ?> $
                     <?php if( $offer_type === 'Rent' ) : ?>
                         <span class="price-period">/ міс.</span>
                     <?php endif; ?>
