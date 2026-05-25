@@ -4,3 +4,27 @@ Author: Frankov Dmytro
 Description: TechReview - A modern and responsive WordPress theme designed for technology blogers and reviewers.
 Version: 1.0
 */
+
+/* Header */
+
+
+
+
+/* Footer */
+
+/* Main Content */
+
+/* Fonts */
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    .post-title {
+        font-size: 1.5em;
+    }
+}
