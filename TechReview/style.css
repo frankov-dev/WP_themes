@@ -27,6 +27,22 @@
     --color-gray-text: #555555;
 }
 
+html,
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+* {
+    font-family: inherit;
+}
+
 /* ========================================================================== */
 /* Header Styles */
 /* ========================================================================== */
@@ -233,7 +249,6 @@
     display: flex;
     gap: 20px;
     margin: 30px 0;
-    font-family: sans-serif;
 }
 
 .pros-cons-block .pros-col,
@@ -272,7 +287,6 @@
 /* Specs Table Block */
 .specs-table-block {
     margin: 30px 0;
-    font-family: sans-serif;
 }
 
 .specs-table-block h4 {
