@@ -1,15 +1,40 @@
 /*
-Theme Name: TechReview
-Author: Frankov Dmytro  
-Description: TechReview - A modern and responsive WordPress theme designed for technology blogers and reviewers.
-Version: 1.0
+  Theme Name: TechReview
+  Author: Frankov Dmytro
+  Description: TechReview - A modern and responsive WordPress theme designed for technology bloggers and reviewers.
+  Version: 1.0
 */
 
-/* Header styles */
+/* ========================================================================== */
+/* Color Variables & Base Styles */
+/* ========================================================================== */
+
+:root {
+    --color-dark: #111111;
+    --color-accent: #800020;
+    --color-text-light: #cccccc;
+    --color-text-primary: #333333;
+    --color-text-secondary: #666666;
+    --color-border: #eef2f5;
+    --color-white: #ffffff;
+    --color-link: #1a73e8;
+    --color-red: #ff4757;
+    --color-green: #2e7d32;
+    --color-red-dark: #c62828;
+    --color-green-light: #e8f5e9;
+    --color-red-light: #ffebee;
+    --color-gray-light: #f8f9fa;
+    --color-gray-text: #555555;
+}
+
+/* ========================================================================== */
+/* Header Styles */
+/* ========================================================================== */
+
 .header {
-    background-color: #111111;
+    background-color: var(--color-dark);
     padding: 15px 0;
-    border-bottom: 2px solid #800020;
+    border-bottom: 2px solid var(--color-accent);
 }
 
 .header .container {
@@ -36,33 +61,45 @@ Version: 1.0
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #cccccc;
+    color: var(--color-text-light);
     transition: color 0.2s ease;
 }
 
 .site-navigation a:hover {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
-/* Footer mirrors header */
+/* ========================================================================== */
+/* Footer Styles */
+/* ========================================================================== */
+
 .footer {
-    background-color: #111111;
+    background-color: var(--color-dark);
     padding: 15px 0;
-    border-top: 2px solid #800020;
-    color: #ffffff;
+    border-top: 2px solid var(--color-accent);
+    color: var(--color-white);
 }
-.footer .container { display: flex; justify-content: center; align-items: center; }
-.footer p { margin: 0; color: #ffffff; }
 
-/* Footer */
+.footer .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* Main Content */
+.footer p {
+    margin: 0;
+    color: var(--color-white);
+}
+
+/* ========================================================================== */
+/* Main Content & Grid */
+/* ========================================================================== */
 
 .section-title {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
-    color: #111111;
+    color: var(--color-dark);
     text-align: center;
 }
 
@@ -74,9 +111,13 @@ Version: 1.0
     max-width: 1100px;
 }
 
+/* ========================================================================== */
+/* Tech Card Styles */
+/* ========================================================================== */
+
 .tech-card {
-    background: #ffffff;
-    border: 1px solid #eef2f5;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     overflow: hidden;
     display: flex;
@@ -112,7 +153,7 @@ Version: 1.0
 }
 
 .tech-card-category a {
-    color: #ff4757;
+    color: var(--color-red);
     text-decoration: none;
 }
 
@@ -123,18 +164,18 @@ Version: 1.0
 }
 
 .tech-card-title a {
-    color: #111111;
+    color: var(--color-dark);
     text-decoration: none;
     font-weight: 700;
 }
 
 .tech-card-title a:hover {
-    color: #1a73e8;
+    color: var(--color-link);
 }
 
 .tech-card-excerpt {
     font-size: 14px;
-    color: #666666;
+    color: var(--color-text-secondary);
     line-height: 1.6;
     margin-bottom: 15px;
 }
@@ -144,24 +185,25 @@ Version: 1.0
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
-    color: #1a73e8;
+    color: var(--color-link);
 }
 
-/* Fonts */
+/* ========================================================================== */
+/* Single Post Styles */
+/* ========================================================================== */
 
-/* Сторінка однієї статті (Single Post) */
 .single-post-container {
-    background: #ffffff;
+    background: var(--color-white);
     padding: 40px;
     margin: 30px auto;
     border-radius: 8px;
-    max-width: 800px; /* Обмежуємо ширину, щоб текст було зручно читати */
+    max-width: 800px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 
 .single-post-title {
     font-size: 32px;
-    color: #111111;
+    color: var(--color-dark);
     margin-bottom: 20px;
 }
 
@@ -179,14 +221,14 @@ Version: 1.0
 .full-post-text {
     font-size: 18px;
     line-height: 1.7;
-    color: #333333;
+    color: var(--color-text-primary);
 }
 
-/* ==========================================================================
-   Кастомні Gutenberg-блоки (ACF Blocks)
-   ========================================================================== */
+/* ========================================================================== */
+/* Custom Gutenberg Blocks (ACF Blocks) */
+/* ========================================================================== */
 
-/* Блок: Плюси та Мінуси */
+/* Pros & Cons Block */
 .pros-cons-block {
     display: flex;
     gap: 20px;
@@ -194,39 +236,40 @@ Version: 1.0
     font-family: sans-serif;
 }
 
-.pros-cons-block .pros-col {
+.pros-cons-block .pros-col,
+.pros-cons-block .cons-col {
     flex: 1;
-    background: #e8f5e9;
     padding: 20px;
     border-radius: 8px;
+}
+
+.pros-cons-block .pros-col {
+    background: var(--color-green-light);
 }
 
 .pros-cons-block .pros-col h4 {
     margin: 0 0 10px 0;
-    color: #2e7d32;
+    color: var(--color-green);
     font-size: 18px;
 }
 
 .pros-cons-block .cons-col {
-    flex: 1;
-    background: #ffebee;
-    padding: 20px;
-    border-radius: 8px;
+    background: var(--color-red-light);
 }
 
 .pros-cons-block .cons-col h4 {
     margin: 0 0 10px 0;
-    color: #c62828;
+    color: var(--color-red-dark);
     font-size: 18px;
 }
 
 .pros-cons-block .block-content {
-    color: #333333;
+    color: var(--color-text-primary);
     font-size: 15px;
     line-height: 1.6;
 }
 
-/* Блок: Таблиця Характеристик */
+/* Specs Table Block */
 .specs-table-block {
     margin: 30px 0;
     font-family: sans-serif;
@@ -234,21 +277,21 @@ Version: 1.0
 
 .specs-table-block h4 {
     margin-bottom: 15px;
-    color: #111111;
+    color: var(--color-dark);
     font-size: 18px;
 }
 
 .specs-table-block table {
     width: 100%;
     border-collapse: collapse;
-    background: #ffffff;
-    border: 1px solid #eef2f5;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .specs-table-block tr {
-    border-bottom: 1px solid #eef2f5;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .specs-table-block tr:last-child {
@@ -257,36 +300,38 @@ Version: 1.0
 
 .specs-table-block th {
     padding: 12px 15px;
-    font-weight: bold;
+    font-weight: 700;
     text-align: left;
-    background: #f8f9fa;
+    background: var(--color-gray-light);
     width: 30%;
-    color: #555555;
+    color: var(--color-gray-text);
 }
 
 .specs-table-block td {
     padding: 12px 15px;
-    color: #111111;
+    color: var(--color-dark);
 }
 
-/* Адаптивність для мобілок (щоб плюси/мінуси ставали один під одним) */
-@media (max-width: 768px) {
-    .pros-cons-block {
-        flex-direction: column;
-        gap: 15px;
-    }
-}
-
+/* ========================================================================== */
 /* Responsive Design */
+/* ========================================================================== */
+
 @media (max-width: 768px) {
     .container {
         width: 100%;
         padding: 10px;
     }
+
     .tech-posts-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
+
+    .pros-cons-block {
+        flex-direction: column;
+        gap: 15px;
+    }
+
     .post-title {
         font-size: 1.5em;
     }
