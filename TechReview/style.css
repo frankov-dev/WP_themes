@@ -336,3 +336,40 @@
         font-size: 1.5em;
     }
 }
+
+/* ==========================================================================
+   Стандартні статичні сторінки (Page Template)
+   ========================================================================== */
+.standard-page-container {
+    background: var(--color-white);
+    padding: 40px;
+    margin: 30px auto;
+    border-radius: 8px;
+    max-width: 900px; /* Трохи ширше ніж single, щоб контакти чи таби ставали нормально */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.page-title {
+    font-size: 32px;
+    color: var(--color-dark);
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 15px;
+}
+
+.page-featured-image {
+    margin-bottom: 30px;
+}
+
+.page-featured-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.page-content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--color-text-primary);
+}
