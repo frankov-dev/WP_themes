@@ -352,6 +352,90 @@ textarea {
 }
 
 /* ==========================================================================
+   Двоколонковий макет головної сторінки
+   ========================================================================== */
+.home-layout-container {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.main-reviews-column {
+    flex: 3; /* Займає 75% ширини */
+}
+
+.quick-news-sidebar {
+    flex: 1; /* Займає 25% ширини */
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 20px;
+    align-self: flex-start; /* Сайдбар не буде розтягуватися по висоті штучно */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--color-dark);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 10px;
+}
+
+/* Стилізація карток швидких новин */
+.quick-news-item {
+    border-bottom: 1px dashed var(--color-border);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.quick-news-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.quick-news-time {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.quick-news-title {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+    color: var(--color-dark);
+    line-height: 1.4;
+}
+
+.quick-news-text {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+.quick-news-text p {
+    margin: 0;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 992px) {
+    .home-layout-container {
+        flex-direction: column; /* На мобілках сайдбар впаде під основні огляди */
+    }
+    .quick-news-sidebar {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* ==========================================================================
    Стандартні статичні сторінки (Page Template)
    ========================================================================== */
 .standard-page-container {

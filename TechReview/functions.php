@@ -22,3 +22,4 @@ add_action('after_setup_theme', 'techreview_setup');
 
 
 require get_template_directory() . '/inc/acf-blocks.php';
+require get_template_directory() . '/inc/cpt.php';
