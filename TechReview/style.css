@@ -149,7 +149,38 @@ Version: 1.0
 
 /* Fonts */
 
+/* Сторінка однієї статті (Single Post) */
+.single-post-container {
+    background: #ffffff;
+    padding: 40px;
+    margin: 30px auto;
+    border-radius: 8px;
+    max-width: 800px; /* Обмежуємо ширину, щоб текст було зручно читати */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
 
+.single-post-title {
+    font-size: 32px;
+    color: #111111;
+    margin-bottom: 20px;
+}
+
+.full-post-image {
+    margin-bottom: 30px;
+}
+
+.full-post-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.full-post-text {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #333333;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
