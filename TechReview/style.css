@@ -43,6 +43,12 @@ textarea {
     font-family: inherit;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 /* Container: centers page content and constrains width */
 .container {
     max-width: 1400px;
@@ -369,10 +375,6 @@ textarea {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px 0;
-}
-
-/* Make the hero slider take the full row and push other blocks below */
-.home-layout-container {
     flex-wrap: wrap;
 }
 
@@ -458,14 +460,85 @@ textarea {
    Слайдер на головній сторінці (Hero Slider)
    ========================================================================== */
 .hero-slider-wrapper {
-    max-width: 1200px;         /* Робимо слайдер такої ж ширини, як і контент нижче */
-    margin: 0 auto 40px;       /* auto вирівнює його по центру екрана, а 40px робить відступ знизу */
+    position: relative;        /* Стає точкою відліку для всього, що всередині */
+    width: 100%;
+    max-width: 1200px;         /* Обмежуємо ширину під наш сайт */
+    height: 400px;             /* Жорстко задаємо висоту банера */
+    margin: 0 auto 30px;       /* Центруємо сам блок і робимо відступ знизу */
+    border-radius: 12px;       /* Закруглюємо кути */
+    overflow: hidden;          /* Все, що вилазить за межі 400px висоти — обрізається */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.hero-slider {
     position: relative;
     width: 100%;
-    height: 450px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    height: 100%;
+}
+
+.slide {
+    position: absolute;        /* Шари накладаються один на один в одну точку */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;             /* Спочатку ховаємо ВСІ слайди */
+}
+
+.slide.active {
+    display: block;            /* Тільки активний слайд стає видимим */
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+}
+
+.slide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* Картинка заповнює простір без деформації */
+    display: block;
+}
+
+.slide-content {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 1;
+    padding: 24px 28px;
+    color: var(--color-white);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.72) 100%);
+}
+
+.slide-badge {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.slide-title {
+    margin: 0 0 10px;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.slide-title a {
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.slide-excerpt {
+    max-width: 700px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 
