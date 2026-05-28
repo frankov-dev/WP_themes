@@ -6,7 +6,11 @@ get_header();
 <main class="main-content">
     <div class="home-layout-container">
 
-        <?php get_template_part( 'template-parts/content/hero-slider' ); ?>
+        <?php 
+        if ( is_home() ) {
+            get_template_part( 'template-parts/content/hero-slider' ); 
+        }
+        ?>
         
         <div class="main-reviews-column">
             <?php if ( is_category() ) : ?>

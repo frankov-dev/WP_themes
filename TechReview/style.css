@@ -43,6 +43,15 @@ textarea {
     font-family: inherit;
 }
 
+/* Container: centers page content and constrains width */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /* ========================================================================== */
 /* Header Styles */
 /* ========================================================================== */
@@ -124,7 +133,7 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 30px;
     margin: 30px auto 0;
-    max-width: 1100px;
+    max-width: 1200px;
 }
 
 /* ========================================================================== */
@@ -213,7 +222,7 @@ textarea {
     padding: 40px;
     margin: 30px auto;
     border-radius: 8px;
-    max-width: 800px;
+    max-width: 1000px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 
@@ -357,9 +366,19 @@ textarea {
 .home-layout-container {
     display: flex;
     gap: 30px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 20px 0;
+}
+
+/* Make the hero slider take the full row and push other blocks below */
+.home-layout-container {
+    flex-wrap: wrap;
+}
+
+.home-layout-container > .hero-slider-wrapper {
+    flex: 0 0 100%;
+    max-width: 100%;
 }
 
 .main-reviews-column {
@@ -434,6 +453,21 @@ textarea {
         box-sizing: border-box;
     }
 }
+
+/* ==========================================================================
+   Слайдер на головній сторінці (Hero Slider)
+   ========================================================================== */
+.hero-slider-wrapper {
+    max-width: 1200px;         /* Робимо слайдер такої ж ширини, як і контент нижче */
+    margin: 0 auto 40px;       /* auto вирівнює його по центру екрана, а 40px робить відступ знизу */
+    position: relative;
+    width: 100%;
+    height: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
 
 /* ==========================================================================
    Стандартні статичні сторінки (Page Template)
