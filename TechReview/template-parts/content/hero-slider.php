@@ -73,5 +73,12 @@ if ( ! $slides->have_posts() ) {
                 </div>
             <?php $i++; endwhile; wp_reset_postdata(); ?>
         </div>
+
+        <div class="slider-controls" aria-label="Hero slider controls">
+            <button type="button" class="slider-arrow slider-arrow-prev" aria-label="Попередній слайд">&#8249;</button>
+            <button type="button" class="slider-arrow slider-arrow-next" aria-label="Наступний слайд">&#8250;</button>
+        </div>
+
+        <div class="slider-timer" aria-live="polite" aria-atomic="true" hidden></div>
     </div>
 <?php endif; ?>
