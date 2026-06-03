@@ -7,7 +7,8 @@ get_header();
     <div class="home-layout-container">
 
         <?php 
-        if ( is_home() ) {
+        // Покажемо слайдер як для блогу, так і для статичної головної сторінки
+        if ( is_home() || is_front_page() ) {
             get_template_part( 'template-parts/content/hero-slider' ); 
         }
         ?>

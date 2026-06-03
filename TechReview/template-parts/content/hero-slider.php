@@ -10,9 +10,25 @@ $slides = new WP_Query( array(
     'orderby'        => 'date',
     'order'          => 'DESC'
 ));
+
+// Якщо слайдів нема — підвантажимо для налагодження звичайні пости як fallback
+if ( ! $slides->have_posts() ) {
+    $slides = new WP_Query( array(
+        'post_type'      => 'post',
+        'posts_per_page' => 3,
+        'orderby'        => 'date',
+        'order'          => 'DESC'
+    ) );
+    $using_fallback = true;
+} else {
+    $using_fallback = false;
+}
 ?>
 
 <?php if ( $slides->have_posts() ) : ?>
+    <?php if ( isset( $using_fallback ) && $using_fallback ) : ?>
+        <!-- Debug: No hero_slide CPT entries found — showing recent posts as fallback -->
+    <?php endif; ?>
     <div class="hero-slider-wrapper">
         <div class="hero-slider">
             <?php 
@@ -34,13 +50,23 @@ $slides = new WP_Query( array(
                         <h2 class="slide-title"><?php the_title(); ?></h2>
                         
                         <div class="slide-excerpt">
-                            <?php the_field('slide_description'); ?>
+                            <?php 
+                            $desc = get_field('slide_description');
+                            if ( ! empty( $desc ) ) {
+                                echo wp_kses_post( $desc );
+                            } else {
+                                // fallback: use post excerpt if ACF field missing
+                                the_excerpt();
+                            }
+                            ?>
                         </div>
 
                         <?php 
                         $link = get_field('slide_link'); 
-                        if( $link ): ?>
+                        if( $link && ! empty( $link['url'] ) ): ?>
                             <a href="<?php echo esc_url($link['url']); ?>" class="slide-btn">Читати далі</a>
+                        <?php else: ?>
+                            <a href="<?php the_permalink(); ?>" class="slide-btn">Читати далі</a>
                         <?php endif; ?>
                     </div>
 
