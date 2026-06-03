@@ -367,11 +367,13 @@ textarea {
    ========================================================================== */
 .home-layout-container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
     gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px 0;
-    flex-wrap: wrap;
 }
 
 .home-layout-container > .hero-slider-wrapper {
@@ -380,17 +382,30 @@ textarea {
 }
 
 .main-reviews-column {
-    flex: 3; /* Займає 75% ширини */
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .quick-news-sidebar {
-    flex: 1; /* Займає 25% ширини */
+    flex: 0 0 320px;
+    width: 320px;
     background: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: 8px;
     padding: 20px;
-    align-self: flex-start; /* Сайдбар не буде розтягуватися по висоті штучно */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 992px) {
+    .home-layout-container {
+        flex-direction: column;
+    }
+
+    .quick-news-sidebar {
+        width: 100%;
+        flex-basis: auto;
+        box-sizing: border-box;
+    }
 }
 
 .sidebar-title {
@@ -439,17 +454,6 @@ textarea {
 
 .quick-news-text p {
     margin: 0;
-}
-
-/* Адаптивність для мобільних пристроїв */
-@media (max-width: 992px) {
-    .home-layout-container {
-        flex-direction: column; /* На мобілках сайдбар впаде під основні огляди */
-    }
-    .quick-news-sidebar {
-        width: 100%;
-        box-sizing: border-box;
-    }
 }
 
 /* ==========================================================================
