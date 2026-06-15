@@ -21,6 +21,15 @@ function techreview_acf_register_blocks() {
             'icon'            => 'table-row-after',
         ));
 
+        acf_register_block_type( array(
+            'name'            => 'flexible-specs',
+            'title'           => 'Гнучка Таблиця Характеристик',
+            'description'     => 'Блок для відображення гнучкої таблиці характеристик.',
+            'render_template' => 'template-parts/blocks/flexible-specs.php',
+            'category'        => 'formatting',
+            'icon'            => 'table-row-after',
+        ));
+
         
     }
 }
