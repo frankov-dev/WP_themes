@@ -30,7 +30,14 @@ function techreview_acf_register_blocks() {
             'icon'            => 'table-row-after',
         ));
 
-        
+        acf_register_block_type( array(
+            'name'            => 'verdict_card',
+            'title'           => 'Вердикт Автора',
+            'description'     => 'Підсумкова плашка з оцінкою гаджета та висновком.',
+            'render_template' => 'template-parts/blocks/verdict.php',
+            'category'        => 'formatting',
+            'icon'            => 'star-filled', // Іконка зірочки
+        ) );
     }
 }
 
