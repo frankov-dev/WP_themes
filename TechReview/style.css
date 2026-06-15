@@ -797,6 +797,19 @@ textarea {
     font-weight: 800;
 }
 
+.score-number.is-low {
+    background: linear-gradient(135deg, #ff6b6b, #c62828);
+}
+
+.score-number.is-medium {
+    background: linear-gradient(135deg, #ffd54f, #f9a825);
+    color: #1f1f1f;
+}
+
+.score-number.is-high {
+    background: linear-gradient(135deg, #66bb6a, #2e7d32);
+}
+
 .score-label {
     font-size: 12px;
     color: rgba(0,0,0,0.6);

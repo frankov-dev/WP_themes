@@ -5,12 +5,26 @@
 
 $score   = get_field('verdict_score');
 $summary = get_field('verdict_summary');
+
+$score_value = is_numeric( $score ) ? (int) $score : null;
+
+if ( null !== $score_value ) {
+    if ( $score_value <= 4 ) {
+        $score_class = 'score-number is-low';
+    } elseif ( $score_value <= 6 ) {
+        $score_class = 'score-number is-medium';
+    } else {
+        $score_class = 'score-number is-high';
+    }
+} else {
+    $score_class = 'score-number';
+}
 ?>
 
 <div class="verdict-block" role="group" aria-label="Вердикт автора">
-    <?php if ( $score ) : ?>
+    <?php if ( null !== $score_value ) : ?>
         <div class="verdict-score-zone">
-            <div class="score-number"><?php echo esc_html($score); ?></div>
+            <div class="<?php echo esc_attr( $score_class ); ?>"><?php echo esc_html( $score_value ); ?></div>
             <div class="score-label">Рейтинг</div>
         </div>
     <?php endif; ?>
