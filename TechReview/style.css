@@ -542,6 +542,59 @@ textarea {
     color: rgba(255, 255, 255, 0.9);
 }
 
+.slider-progress {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    z-index: 5;
+    display: flex;
+    gap: 6px;
+    pointer-events: none;
+}
+
+.slider-progress-item {
+    flex: 1 1 0;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+    overflow: hidden;
+}
+
+.slider-progress-fill {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: rgba(255, 255, 255, 0.95);
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+}
+
+.slider-progress-item.is-active .slider-progress-fill {
+    animation: none;
+}
+
+.slider-progress-item.is-complete .slider-progress-fill {
+    transform: scaleX(1);
+    animation: none;
+}
+
+.slider-progress-item:not(.is-active):not(.is-complete) .slider-progress-fill {
+    transform: scaleX(0);
+    animation: none;
+}
+
+@keyframes slider-progress-fill {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
 .slider-controls {
     position: absolute;
     inset: 0;
@@ -581,26 +634,6 @@ textarea {
 
 .slider-arrow-next {
     right: 16px;
-}
-
-.slider-timer {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 4;
-    min-width: 52px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--color-white);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-align: center;
-}
-
-.slider-timer[hidden] {
-    display: none;
 }
 
 /* Responsive adjustments for Hero Slider */
@@ -671,12 +704,15 @@ textarea {
         right: 10px;
     }
 
-    .slider-timer {
+    .slider-progress {
         top: 10px;
+        left: 10px;
         right: 10px;
-        min-width: 46px;
-        padding: 6px 10px;
-        font-size: 12px;
+        gap: 4px;
+    }
+
+    .slider-progress-item {
+        height: 3px;
     }
 }
 
@@ -711,6 +747,13 @@ textarea {
         width: 34px;
         height: 34px;
         font-size: 24px;
+    }
+
+    .slider-progress {
+        top: 8px;
+        left: 8px;
+        right: 8px;
+        gap: 3px;
     }
 }
 

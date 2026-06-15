@@ -30,6 +30,14 @@ if ( ! $slides->have_posts() ) {
         <!-- Debug: No hero_slide CPT entries found — showing recent posts as fallback -->
     <?php endif; ?>
     <div class="hero-slider-wrapper">
+        <div class="slider-progress" aria-hidden="true">
+            <?php for ( $j = 0; $j < $slides->post_count; $j++ ) : ?>
+                <div class="slider-progress-item<?php echo ( $j === 0 ) ? ' is-active' : ''; ?>">
+                    <div class="slider-progress-fill"></div>
+                </div>
+            <?php endfor; ?>
+        </div>
+
         <div class="hero-slider">
             <?php 
             $i = 0;
@@ -78,7 +86,5 @@ if ( ! $slides->have_posts() ) {
             <button type="button" class="slider-arrow slider-arrow-prev" aria-label="Попередній слайд">&#8249;</button>
             <button type="button" class="slider-arrow slider-arrow-next" aria-label="Наступний слайд">&#8250;</button>
         </div>
-
-        <div class="slider-timer" aria-live="polite" aria-atomic="true" hidden></div>
     </div>
 <?php endif; ?>
