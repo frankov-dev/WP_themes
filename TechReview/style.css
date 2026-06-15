@@ -32,6 +32,13 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    margin: 0;
+    background: #f4f6f8;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+}
+
 button,
 input,
 select,
@@ -54,6 +61,12 @@ textarea {
     box-sizing: border-box;
 }
 
+.site-title,
+.site-description,
+.site-branding p {
+    margin: 0;
+}
+
 /* ========================================================================== */
 /* Header Styles */
 /* ========================================================================== */
@@ -67,6 +80,39 @@ textarea {
 .header .container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.site-branding {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.site-branding-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.site-title {
+    color: var(--color-white);
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+.site-title:hover {
+    color: var(--color-text-light);
+}
+
+.site-description {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 12px;
+    margin-top: 2px;
 }
 
 .site-navigation {
@@ -80,6 +126,7 @@ textarea {
     display: flex;
     justify-content: center;
     gap: 25px;
+    flex-wrap: wrap;
 }
 
 .site-navigation a {
@@ -347,6 +394,21 @@ textarea {
         padding: 10px;
     }
 
+    .header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-navigation {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .site-navigation ul {
+        justify-content: flex-start;
+        gap: 16px;
+    }
+
     .tech-posts-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -463,7 +525,9 @@ textarea {
     position: relative;        /* Стає точкою відліку для всього, що всередині */
     width: 100%;
     max-width: 1200px;         /* Обмежуємо ширину під наш сайт */
-    height: 400px;             /* Жорстко задаємо висоту банера */
+    aspect-ratio: 16 / 7;
+    height: auto;
+    min-height: 320px;
     margin: 0 auto 30px;       /* Центруємо сам блок і робимо відступ знизу */
     border-radius: 12px;       /* Закруглюємо кути */
     overflow: hidden;          /* Все, що вилазить за межі 400px висоти — обрізається */
@@ -644,7 +708,7 @@ textarea {
 @media (max-width: 768px) {
     .hero-slider-wrapper {
         height: auto; /* робимо висоту залежною від контенту на мобайлі */
-        min-height: 120px; /* гарантуємо, що блок не схлопнеться повністю */
+        min-height: 240px; /* гарантуємо, що блок не схлопнеться повністю */
         border-radius: 8px;
         margin-bottom: 20px;
     }
@@ -664,6 +728,7 @@ textarea {
     .slide-excerpt {
         font-size: 14px;
         max-width: 100%;
+        line-clamp: 3;
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
@@ -722,7 +787,7 @@ textarea {
 
 @media (max-width: 480px) {
     .hero-slider-wrapper {
-        height: 200px; /* телефони */
+        min-height: 220px; /* телефони */
         border-radius: 6px;
     }
 
@@ -732,6 +797,7 @@ textarea {
     }
 
     .slide-excerpt {
+        line-clamp: 2;
         -webkit-line-clamp: 2;
         font-size: 13px;
     }
@@ -854,6 +920,12 @@ textarea {
     border-radius: 8px;
     max-width: 900px; /* Трохи ширше ніж single, щоб контакти чи таби ставали нормально */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.main-content,
+.standard-page-container,
+.single-post-container {
+    width: 100%;
 }
 
 .page-title {

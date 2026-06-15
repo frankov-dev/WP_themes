@@ -17,7 +17,7 @@ function techreview_register_custom_post_types() {
         'has_archive'        => true, // Автоматично створює окрему сторінку-архів для всіх коротких новин!
         'menu_icon'          => 'dashicons-megaphone', // Крута іконка рупора в адмінці
         'show_in_rest'       => true, // Вмикає сучасний редактор Gutenberg
-        'supports'           => array( 'title', 'editor' ) // Для швидкої новини потрібен лише заголовок і короткий текст
+        'supports'           => array( 'title', 'editor', 'excerpt' ) // Короткі новини мають мати стислий анонс у сайдбарі
     );
     
     register_post_type( 'quick_news', $args );
@@ -34,7 +34,7 @@ function register_hero_slides_cpt() {
         'public'      => true,
         'has_archive' => false, // Нам не потрібна сторінка архіву для слайдів
         'menu_icon'   => 'dashicons-images-alt2', // Іконка з картинками
-        'supports'    => array( 'title', 'thumbnail' ), // Заголовок і картинка
+        'supports'    => array( 'title', 'thumbnail', 'excerpt' ), // Анонс використовується як запасний текст для слайду
         'show_in_rest'=> true,
     ));
 }

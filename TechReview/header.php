@@ -6,15 +6,16 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
     <header class="header">
-        <div class="container">
+        <div class="container header-inner">
             <nav class="site-navigation">
                 <?php
                 wp_nav_menu(array(
                     'theme_location' => 'primary',
                     'container' => false,
                     'menu_class' => 'header-menu',
-                    'fallback_cb' => false,
+                    'fallback_cb' => 'wp_page_menu',
                 ));
                 ?>
             </nav>
