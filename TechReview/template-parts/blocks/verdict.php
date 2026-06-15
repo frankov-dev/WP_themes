@@ -7,7 +7,7 @@ $score   = get_field('verdict_score');
 $summary = get_field('verdict_summary');
 ?>
 
-<div class="verdict-block">
+<div class="verdict-block" role="group" aria-label="Вердикт автора">
     <div class="verdict-score-zone">
         <div class="score-number"><?php echo $score ? esc_html($score) : '0'; ?></div>
         <div class="score-label">Рейтинг</div>
