@@ -542,6 +542,10 @@ textarea {
     color: rgba(255, 255, 255, 0.9);
 }
 
+.slide-btn {
+    color: var(--color-white);
+}
+
 .slider-progress {
     position: absolute;
     top: 14px;
