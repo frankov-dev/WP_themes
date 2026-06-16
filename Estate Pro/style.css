@@ -99,48 +99,52 @@ img {
    ========================================================================== */
 .property-card {
     background: linear-gradient(180deg, #ffffff 0%, #fcfaf7 100%);
-    border-radius: 28px;
+    border-radius: 22px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(139, 94, 60, 0.08);
-    padding: 24px;
-    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 22px rgba(139, 94, 60, 0.07);
+    padding: 16px;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .property-card:hover {
-    transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 18px 42px rgba(139, 94, 60, 0.12);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(139, 94, 60, 0.11);
 }
 .property-image img {
     width: 100%;
-    height: 220px;
+    height: 160px;
     object-fit: cover;
     display: block;
-    border-radius: 22px;
+    border-radius: 18px;
 }
 .property-info {
-    padding-top: 20px;
+    padding-top: 12px;
 }
 .property-title {
-    margin: 0 0 12px 0;
-    font-size: clamp(20px, 2vw, 24px);
-    line-height: 1.25;
+    margin: 0 0 6px 0;
+    font-size: 18px;
+    line-height: 1.2;
     color: var(--estate-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 .property-link {
-    display: block;
-    background: linear-gradient(180deg, #936748 0%, #8b5e3c 100%);
+    display: inline-block;
+    background: linear-gradient(180deg, #9b6f51 0%, #8b5e3c 100%);
     color: #ffffff;
     text-align: center;
-    padding: 12px;
+    padding: 8px 12px;
     text-decoration: none;
-    border-radius: 16px;
+    border-radius: 12px;
     font-weight: 700;
-    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1), filter 0.32s ease;
-    box-shadow: 0 8px 18px rgba(139, 94, 60, 0.14);
+    font-size: 14px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    box-shadow: 0 6px 14px rgba(139, 94, 60, 0.12);
 }
 .property-link:hover {
     transform: translateY(-2px);
-    filter: brightness(1.02);
-    box-shadow: 0 12px 24px rgba(139, 94, 60, 0.18);
+    box-shadow: 0 10px 20px rgba(139, 94, 60, 0.16);
 }
 
 /* ==========================================================================
@@ -239,11 +243,13 @@ img {
 }
 
 .property-card .badge--sale {
-    background: var(--estate-accent);
+    background: #8b5e3c;
+    color: #fff;
 }
 
 .property-card .badge--rent {
-    background: var(--estate-muted);
+    background: #cdb9aa;
+    color: #3a2b24;
 }
 
 .property-card .property-title {
@@ -251,39 +257,21 @@ img {
 }
 
 .property-card .property-address {
-    margin: 5px 0;
-    font-size: 14px;
+    margin: 2px 0 6px 0;
+    font-size: 13px;
     color: var(--estate-muted);
 }
 
 .property-card .property-meta {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #555555;
-}
-
-.property-card .property-meta__row {
-    margin: 5px 0;
-}
-
-.property-card .property-price {
-    color: #1a73e8;
-    font-size: 16px;
-}
-
-.property-card .property-rent-period {
-    font-size: 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
     color: var(--estate-muted);
-    font-weight: 400;
 }
 
-.property-card .parking-yes {
-    color: #2ecc71;
-}
-
-.property-card .parking-no {
-    color: #e74c3c;
-    font-weight: 400;
+.property-card .property-meta--compact {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .property-card hr {
@@ -294,9 +282,9 @@ img {
 
 .agent-card {
     background: linear-gradient(180deg, #ffffff 0%, #fcfaf7 100%);
-    border-radius: 28px;
-    box-shadow: 0 10px 30px rgba(139, 94, 60, 0.08);
-    padding: 24px;
+    border-radius: 22px;
+    box-shadow: 0 8px 22px rgba(139, 94, 60, 0.07);
+    padding: 18px;
 }
 
 /* ==========================================================================
