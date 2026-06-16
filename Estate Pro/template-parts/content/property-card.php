@@ -1,6 +1,6 @@
 <?php
 $offer_type  = get_field( 'property_offer_type' );
-$badge_color = ( $offer_type === 'Rent' ) ? '#7f8c8d' : '#2ecc71';
+$badge_class = ( $offer_type === 'Rent' ) ? 'badge--rent' : 'badge--sale';
 ?>
 
 <article class="property-card">
@@ -16,36 +16,36 @@ $badge_color = ( $offer_type === 'Rent' ) ? '#7f8c8d' : '#2ecc71';
 
     <div class="property-info">
         <?php if ( $offer_type ) : ?>
-            <span class="badge" style="display:inline-block; background: <?php echo esc_attr( $badge_color ); ?>; color:#fff; padding:3px 8px; font-size:12px; border-radius:4px; margin-bottom:10px; font-weight:bold;">
+            <span class="badge <?php echo esc_attr( $badge_class ); ?>">
                 <?php echo esc_html( $offer_type ); ?>
             </span>
         <?php endif; ?>
 
-        <h3 class="property-title" style="margin-top:0;"><?php the_title(); ?></h3>
+        <h3 class="property-title"><?php the_title(); ?></h3>
 
-        <p class="property-address" style="color: #7f8c8d; font-size: 14px; margin: 5px 0;">
+        <p class="property-address">
             📍 <?php the_field( 'property_address' ); ?>
         </p>
 
-        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+        <hr>
 
-        <div class="property-meta" style="font-size: 14px; color: #555; margin-bottom: 20px;">
-            <p style="margin: 5px 0;">Ціна:
-                <strong style="color: #1a73e8; font-size: 16px;">
+        <div class="property-meta">
+            <p class="property-meta__row">Ціна:
+                <strong class="property-price">
                     <?php the_field( 'property_price' ); ?> $
-                    <?php if ( $offer_type === 'Rent' ) { echo '<span style="font-size:12px; color:#7f8c8d;">/ міс.</span>'; } ?>
+                    <?php if ( $offer_type === 'Rent' ) { echo '<span class="property-rent-period">/ міс.</span>'; } ?>
                 </strong>
             </p>
 
-            <p style="margin: 5px 0;">Площа: <strong><?php the_field( 'property_area' ); ?> м²</strong></p>
-            <p style="margin: 5px 0;">Кімнат: <strong><?php the_field( 'property_rooms' ); ?></strong></p>
+            <p class="property-meta__row">Площа: <strong><?php the_field( 'property_area' ); ?> м²</strong></p>
+            <p class="property-meta__row">Кімнат: <strong><?php the_field( 'property_rooms' ); ?></strong></p>
 
-            <p style="margin: 5px 0;">Паркінг:
+            <p class="property-meta__row">Паркінг:
                 <strong>
                     <?php if ( get_field( 'property_has_parking' ) ) : ?>
-                        <span style="color: #2ecc71;">✅ Є у наявності</span>
+                        <span class="parking-yes">✅ Є у наявності</span>
                     <?php else : ?>
-                        <span style="color: #e74c3c; font-weight:normal;">❌ Немає</span>
+                        <span class="parking-no">❌ Немає</span>
                     <?php endif; ?>
                 </strong>
             </p>
