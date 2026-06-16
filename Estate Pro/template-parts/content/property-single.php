@@ -1,7 +1,7 @@
 <?php
 /**
  * Property Single Content Layout
- * Full single-property layout refactored for CPT Agents, .env Google Maps, and Pro functionality.
+ * Simplified version: pure text address with a direct premium link to Google Maps (No API keys needed!).
  */
 
     $price       = get_field( 'property_price' );
@@ -10,9 +10,9 @@
     $address     = get_field( 'property_address' );
     $offer_type  = get_field( 'property_offer_type' );
     $has_parking = get_field( 'property_has_parking' );
-    $agent_post  = get_field( 'property_agent' ); // Отримуємо об'єкт зв'язаного поста агента
+    $agent_post  = get_field( 'property_agent' ); // Об'єкт зв'язаного поста Агента
 
-    // Твій крутий універсальний хелпер безпечного вибору значень
+    // Твій універсальний хелпер безпечного вибору значень
     $pick_value = static function ( $source, array $keys, $default = '' ) {
         if ( ! is_array( $source ) ) {
             return $default;
@@ -27,40 +27,22 @@
         return $default;
     };
 
-    // --- 🗺️ ЛОГІКА ГЕОЛОКАЦІЇ ТА КАРТИ ---
-    $address_text   = '';
-    $distance_badge = '';
-    $map_src        = '';
+    // --- 🗺️ ЛОГІКА ТЕКСТОВОЇ АДРЕСИ ТА ПОСИЛАННЯ НА КАРТУ ---
+    $address_text    = '';
+    $google_maps_url = '';
 
     if ( is_array( $address ) ) {
         $address_text = (string) $pick_value( $address, array( 'address', 'formatted_address', 'label' ), '' );
-        $lat          = $pick_value( $address, array( 'lat', 'latitude' ), '' );
-        $lng          = $pick_value( $address, array( 'lng', 'lon', 'longitude' ), '' );
-
-        // 🧮 Твоя нова штучка: Рахуємо відстань до центру міста (Площа Ринок, Львів)
-        if ( '' !== $lat && '' !== $lng ) {
-            $center_lat = 49.842951; 
-            $center_lng = 24.031111;
-            $earth_radius = 6371; // Радіус Землі в км
-
-            $dLat = deg2rad( (float)$lat - $center_lat );
-            $dLng = deg2rad( (float)$lng - $center_lng );
-
-            $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($center_lat)) * cos(deg2rad((float)$lat)) * sin($dLng/2) * sin($dLng/2);
-            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
-            $km = round( $earth_radius * $c, 1 );
-            $distance_badge = '<span class="geo-distance-badge">📍 ' . $km . ' km from center</span>';
-        }
     } else {
         $address_text = trim( (string) $address );
     }
 
-    // Використовуємо офіційний Embed API з твоєю константою з .env
-    if ( $address_text && defined('GOOGLE_MAPS_API_KEY') && GOOGLE_MAPS_API_KEY ) {
-        $map_src = 'https://www.google.com/maps/embed/v1/place?key=' . esc_attr( GOOGLE_MAPS_API_KEY ) . '&q=' . urlencode( $address_text ) . '&zoom=15';
+    // Створюємо офіційне універсальне посилання для пошуку в Google Maps
+    if ( $address_text ) {
+        $google_maps_url = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $address_text );
     }
 
-    // --- 👥 ЛОГІКА АГЕНТА (ЗЧИТУЄМО З ІНШОГО ПОСТА ЗА ID) ---
+    // --- 👥 ЛОГІКА АГЕНТА (CPT Post Object) ---
     $agent_name   = get_the_author_meta( 'display_name' );
     $agent_phone  = '';
     $agent_email  = '';
@@ -68,10 +50,10 @@
 
     if ( $agent_post && is_object( $agent_post ) ) {
         $agent_id     = $agent_post->ID;
-        $agent_name   = get_the_title( $agent_id ); // Ім'я беремо з заголовка поста агента
-        $agent_phone  = get_field( 'agent_phone', $agent_id ); // Поля тягнемо з ID поста агента
+        $agent_name   = get_the_title( $agent_id ); 
+        $agent_phone  = get_field( 'agent_phone', $agent_id ); 
         $agent_email  = get_field( 'agent_email', $agent_id );
-        $agent_avatar = get_the_post_thumbnail_url( $agent_id, 'medium' ); // Аватарка — це Featured Image агента
+        $agent_avatar = get_the_post_thumbnail_url( $agent_id, 'medium' ); 
     }
 
     if ( ! $agent_avatar ) {
@@ -88,12 +70,12 @@
     $thumbnail_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
 ?>
 
-<a class="back-btn back-to-catalog" href="<?php echo esc_url( home_url( '/' ) ); ?>">&larr; Back to Catalog</a>
+<a class="back-btn back-to-catalog" href="<?php echo esc_url( home_url( '/' ) ); ?>">← Back to Catalog</a>
 
-<div class="property-heading-header" style="margin: 20px 0 25px 0;">
-    <h1 class="property-main-title" style="margin: 0; display: inline-block; vertical-align: middle;"><?php the_title(); ?></h1>
+<div class="property-heading-header" style="margin: 20px 0 25px 0; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+    <h1 class="property-main-title" style="margin: 0; font-weight: 800; font-size: clamp(28px, 4vw, 38px);"><?php the_title(); ?></h1>
     <?php if ( $offer_type ) : ?>
-        <span class="pro-status-badge status-<?php echo strtolower(esc_attr($offer_type)); ?>" style="margin-left: 15px; padding: 6px 14px; border-radius: 30px; font-size: 13px; font-weight: 800; text-transform: uppercase; background: <?php echo $offer_type === 'Rent' ? '#dbeafe' : '#fee2e2'; ?>; color: <?php echo $offer_type === 'Rent' ? '#3b82f6' : '#ef4444'; ?>;">
+        <span class="pro-status-badge status-<?php echo strtolower(esc_attr($offer_type)); ?>" style="padding: 6px 14px; border-radius: 30px; font-size: 13px; font-weight: 800; text-transform: uppercase; background: <?php echo $offer_type === 'Rent' ? '#dbeafe' : '#fee2e2'; ?>; color: <?php echo $offer_type === 'Rent' ? '#3b82f6' : '#ef4444'; ?>;">
             For <?php echo esc_html($offer_type); ?>
         </span>
     <?php endif; ?>
@@ -150,29 +132,17 @@
             </div>
         </section>
 
-        <section class="property-map-wrapper">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                <h2 style="margin: 0;">Location & Infrastructure</h2>
-                <?php echo $distance_badge; // Наш красивий бейдж з кілометрами ?>
-            </div>
+        <section class="property-map-wrapper" style="background: #ffffff; padding: 25px; border-radius: 18px; box-shadow: 0 4px 20px rgba(139, 94, 60, 0.02); border: 1px solid rgba(139, 94, 60, 0.05); margin-top: 35px;">
+            <h2>Location</h2>
 
             <?php if ( $address_text ) : ?>
-                <p class="map-address-text" style="color: #5f6368; margin-bottom: 15px;">🏢 <strong>Full Address:</strong> <?php echo esc_html( $address_text ); ?></p>
-            <?php endif; ?>
-
-            <?php if ( $map_src ) : ?>
-                <div class="google-iframe-container" style="width: 100%; height: 380px; border-radius: 14px; overflow: hidden;">
-                    <iframe
-                        title="Property location map"
-                        src="<?php echo esc_url( $map_src ); ?>"
-                        width="100%"
-                        height="100%"
-                        style="border:0;"
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        allowfullscreen
-                    ></iframe>
-                </div>
+                <p class="map-address-text" style="color: #5f6368; margin-bottom: 20px; font-size: 16px;">🏢 <strong>Address:</strong> <?php echo esc_html( $address_text ); ?></p>
+                
+                <a class="agent-btn phone-btn" href="<?php echo esc_url( $google_maps_url ); ?>" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 14px; background: var(--estate-accent); color: #ffffff; transition: background 0.2s ease;">
+                    🗺️ Open in Google Maps
+                </a>
+            <?php else : ?>
+                <p style="color: var(--estate-muted); font-style: italic;">Address not specified.</p>
             <?php endif; ?>
         </section>
     </div>
@@ -184,15 +154,14 @@
             </div>
 
             <span class="agent-status-tag">Listing Agent</span>
-            <h2 class="agent-sidebar-name"><?php echo esc_html( $agent_name ); ?></h2>
+            <h2 class="agent-sidebar-name" style="font-size: 20px; color: #202124; margin: 5px 0 20px 0; font-weight: 700;"><?php echo esc_html( $agent_name ); ?></h2>
 
             <div class="agent-sidebar-contacts" style="display: flex; flex-direction: column; gap: 10px;">
-                <?php if ( $agent_phone ) : ?>
+                <?php if ( $clean_phone ) : ?>
                     <a class="agent-btn phone-btn" href="tel:<?php echo esc_attr( $clean_phone ); ?>">📞 Call Agent</a>
                     
-                    <!-- ⚡ Функціональні кнопки миттєвого зв'язку в один клік -->
-                    <a class="agent-btn telegram-btn" href="https://t.me/<?php echo esc_attr( str_replace('+', '', $clean_phone) ); ?>" target="_blank" style="background: #e0f2fe; color: #0369a1;">💬 Chat via Telegram</a>
-                    <a class="agent-btn whatsapp-btn" href="https://wa.me/<?php echo esc_attr( $clean_phone ); ?>" target="_blank" style="background: #dcfce7; color: #15803d;">🟢 Chat via WhatsApp</a>
+                    <a class="agent-btn telegram-btn" href="https://t.me/<?php echo esc_attr( str_replace('+', '', $clean_phone) ); ?>" target="_blank" style="background: #e0f2fe; color: #0369a1; display: block; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; text-align: center;">💬 Chat via Telegram</a>
+                    <a class="agent-btn whatsapp-btn" href="https://wa.me/<?php echo esc_attr( $clean_phone ); ?>" target="_blank" style="background: #dcfce7; color: #15803d; display: block; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; text-align: center;">🟢 Chat via WhatsApp</a>
                 <?php endif; ?>
 
                 <?php if ( $agent_email ) : ?>

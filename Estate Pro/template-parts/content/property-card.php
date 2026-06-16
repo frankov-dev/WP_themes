@@ -11,6 +11,27 @@ $rooms       = get_field('property_rooms');
 $offer_type  = get_field('property_offer_type'); // Returns 'Rent' or 'Sale'
 $has_parking = get_field('property_has_parking'); // Returns true or false
 $address     = get_field('property_address');
+
+// Helper для безпечного вибору значень з масиву
+$pick_value = static function ( $source, array $keys, $default = '' ) {
+    if ( ! is_array( $source ) ) {
+        return $default;
+    }
+    foreach ( $keys as $key ) {
+        if ( array_key_exists( $key, $source ) && '' !== $source[ $key ] && null !== $source[ $key ] ) {
+            return $source[ $key ];
+        }
+    }
+    return $default;
+};
+
+// Екстрагуємо адресу з Google Map поля
+$address_text = '';
+if ( is_array( $address ) ) {
+    $address_text = (string) $pick_value( $address, array( 'address', 'formatted_address' ), '' );
+} elseif ( ! empty( $address ) ) {
+    $address_text = trim( (string) $address );
+}
 ?>
 
 <article class="property-card">
@@ -40,9 +61,9 @@ $address     = get_field('property_address');
         </h3>
 
         <!-- Рядок з точкою геолокації (локація для Google карти) -->
-        <?php if ( $address ) : ?>
+        <?php if ( $address_text ) : ?>
             <div class="property-card-location">
-                📍 <span><?php echo esc_html($address); ?></span>
+                📍 <span><?php echo esc_html( $address_text ); ?></span>
             </div>
         <?php endif; ?>
 
@@ -65,6 +86,11 @@ $address     = get_field('property_address');
             <div class="spec-row">
                 <span class="spec-label">Rooms:</span>
                 <span class="spec-value"><?php echo $rooms ? esc_html($rooms) : 'N/A'; ?></span>
+            </div>
+
+            <div class="spec-row">
+                <span class="spec-label">Address:</span>
+                <span class="spec-value"><?php echo $address_text ? esc_html( $address_text ) : 'N/A'; ?></span>
             </div>
 
             <div class="spec-row">
