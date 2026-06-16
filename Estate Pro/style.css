@@ -387,6 +387,197 @@ img {
 }
 
 /* ==========================================================================
+   9. Detailed Property Page Layout
+   ========================================================================== */
+.single-property-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.back-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #1a73e8;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+}
+
+.property-main-title {
+    font-size: 32px;
+    color: #202124;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.property-hero-image img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+
+.property-grid-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.specs-card-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    margin-bottom: 35px;
+}
+
+.spec-grid-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.spec-icon {
+    font-size: 24px;
+    background: #f1f5f9;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.specs-card-box .spec-title {
+    display: block;
+    font-size: 12px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.specs-card-box .spec-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #202124;
+    text-align: left;
+}
+
+.specs-card-box .spec-value small {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.property-map-wrapper {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.map-address-text {
+    color: #5f6368;
+    margin-bottom: 10px;
+}
+
+.distance-badge {
+    display: inline-block;
+    background: #fef3c7;
+    color: #d97706;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.google-iframe-container {
+    width: 100%;
+    height: 350px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.sidebar-agent-card {
+    background: #ffffff;
+    border-top: 4px solid #1a73e8;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 20px;
+}
+
+.agent-avatar-box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #f1f5f9;
+}
+
+.agent-status-tag {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #7f8c8d;
+    letter-spacing: 0.5px;
+}
+
+.agent-sidebar-name {
+    font-size: 20px;
+    color: #202124;
+    margin: 5px 0 20px 0;
+    font-weight: 700;
+}
+
+.agent-sidebar-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.agent-btn {
+    display: block;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.phone-btn {
+    background: #1a73e8;
+    color: #ffffff;
+}
+
+.phone-btn:hover {
+    background: #1557b0;
+}
+
+.email-btn {
+    background: #f1f5f9;
+    color: #202124;
+}
+
+.email-btn:hover {
+    background: #e2e8f0;
+}
+
+/* ==========================================================================
    7. АДАПТИВНІСТЬ (RESPONSIVE DESIGN) 
    ========================================================================== */
 @media (max-width: 992px) {
@@ -394,10 +585,19 @@ img {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
+
+    .property-grid-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-agent-card {
+        position: static;
+    }
 }
 @media (max-width: 768px) {
     .main-catalog,
-    .single-property-container {
+    .single-property-container,
+    .single-property-wrapper {
         padding-left: 16px;
         padding-right: 16px;
     }
@@ -410,6 +610,27 @@ img {
     .single-property-image img {
         height: 250px;
     }
+
+    .property-hero-image img {
+        height: 250px;
+    }
+
+    .specs-card-box {
+        padding: 18px;
+    }
+
+    .property-map-wrapper {
+        padding: 20px;
+    }
+
+    .sidebar-agent-card {
+        padding: 22px;
+    }
+
+    .google-iframe-container {
+        height: 280px;
+    }
+
     .property-details-block {
         padding: 15px;
     }
