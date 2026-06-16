@@ -1,73 +1,86 @@
 <?php
-$offer_type  = get_field( 'property_offer_type' );
-$badge_class = ( $offer_type === 'Rent' ) ? 'badge--rent' : 'badge--sale';
-$price = get_field( 'property_price' );
-$area = get_field( 'property_area' );
-$rooms = get_field( 'property_rooms' );
-$has_parking = get_field( 'property_has_parking' );
+/**
+ * Template part for displaying a single property card in the catalog grid.
+ * Fully refactored with clean English ACF variables.
+ */
 
-$compact_meta = array();
-if ( $area ) { $compact_meta[] = esc_html( $area ) . ' м²'; }
-if ( $rooms ) { $compact_meta[] = esc_html( $rooms ) . ' кімн.'; }
-if ( $has_parking ) { $compact_meta[] = 'Паркінг'; }
-else { $compact_meta[] = 'Без паркінгу'; }
-// Fallback image: use Unsplash query for real interior/exterior photos
-$fallback_image = 'https://source.unsplash.com/800x600/?apartment,interior,house';
+// 1. Пул наших нових англомовних змінних
+$price       = get_field('property_price');
+$area        = get_field('property_area');
+$rooms       = get_field('property_rooms');
+$offer_type  = get_field('property_offer_type'); // Returns 'Rent' or 'Sale'
+$has_parking = get_field('property_has_parking'); // Returns true or false
+$address     = get_field('property_address');
 ?>
 
 <article class="property-card">
-    <div class="property-image">
-        <?php
-        if ( has_post_thumbnail() ) {
-            the_post_thumbnail( 'medium' );
-        } else {
-            echo '<img src="https://picsum.photos/800/600?random=' . esc_attr( get_the_ID() ) . '" alt="' . esc_attr( get_the_title() ) . '">';
-        }
-        ?>
-    </div>
-
-    <div class="property-info">
-        <?php if ( $offer_type ) : ?>
-            <span class="badge <?php echo esc_attr( $badge_class ); ?>">
-                <?php echo esc_html( $offer_type ); ?>
-            </span>
+    
+    <!-- 1. Зображення об'єкта та бейдж типу угоди -->
+    <div class="property-card-image">
+        <?php if ( has_post_thumbnail() ) : ?>
+            <?php the_post_thumbnail('medium_large'); ?>
+        <?php else : ?>
+            <!-- Заглушка, якщо фотку забули завантажити -->
+            <img src="https://placehold.co/600x400/eef2f5/7f8c8d?text=No+Image" alt="No Image Available">
         <?php endif; ?>
 
-        <h3 class="property-title"><?php the_title(); ?></h3>
+        <?php if ( $offer_type ) : ?>
+            <span class="property-badge badge-<?php echo strtolower(esc_attr($offer_type)); ?>">
+                <?php echo esc_html($offer_type); ?>
+            </span>
+        <?php endif; ?>
+    </div>
 
-        <p class="property-address">
-            📍 <?php the_field( 'property_address' ); ?>
-        </p>
+    <!-- 2. Контентна частина картки -->
+    <div class="property-card-content">
+        
+        <!-- Головний комерційний заголовок об'єкта -->
+        <h3 class="property-card-title">
+            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+        </h3>
 
-        <hr>
+        <!-- Рядок з точкою геолокації (локація для Google карти) -->
+        <?php if ( $address ) : ?>
+            <div class="property-card-location">
+                📍 <span><?php echo esc_html($address); ?></span>
+            </div>
+        <?php endif; ?>
 
-        <div class="property-meta">
-            <p class="property-meta__row">Ціна:
-                <strong class="property-price">
-                    <?php the_field( 'property_price' ); ?> $
-                    <?php if ( $offer_type === 'Rent' ) { echo '<span class="property-rent-period">/ міс.</span>'; } ?>
-                </strong>
-            </p>
+        <!-- Список технічних характеристик -->
+        <div class="property-card-specs">
+            
+            <div class="spec-row">
+                <span class="spec-label">Price:</span>
+                <span class="spec-value price-value">
+                    <?php echo $price ? esc_html($price) . ' $' : 'Contact us'; ?>
+                    <?php echo ($offer_type === 'Rent') ? '<small>/ mo</small>' : ''; ?>
+                </span>
+            </div>
 
-                            echo '<img src="' . esc_url( $fallback_image ) . '" alt="' . esc_attr( get_the_title() ) . '">';
-            <p class="property-meta__row">Кімнат: <strong><?php the_field( 'property_rooms' ); ?></strong></p>
+            <div class="spec-row">
+                <span class="spec-label">Area:</span>
+                <span class="spec-value"><?php echo $area ? esc_html($area) . ' m²' : 'N/A'; ?></span>
+            </div>
 
-                        <?php if ( $price ) : ?>
-                            <span class="property-price-overlay"><?php echo esc_html( $price ); ?> $</span>
-                        <?php endif; ?>
-            <p class="property-meta__row">Паркінг:
-                <strong>
-                    <?php if ( get_field( 'property_has_parking' ) ) : ?>
-                        <span class="parking-yes">✅ Є у наявності</span>
-                    <?php else : ?>
-                        <span class="parking-no">❌ Немає</span>
-                    <?php endif; ?>
-                </strong>
-            </p>
+            <div class="spec-row">
+                <span class="spec-label">Rooms:</span>
+                <span class="spec-value"><?php echo $rooms ? esc_html($rooms) : 'N/A'; ?></span>
+            </div>
+
+            <div class="spec-row">
+                <span class="spec-label">Parking:</span>
+                <span class="spec-value"><?php echo $has_parking ? '✅ Available' : '❌ None'; ?></span>
+            </div>
+
         </div>
 
-        <a href="<?php the_permalink(); ?>" class="property-link">
-            Переглянути деталі
-        </a>
+        <!-- 3. Кнопка переходу на детальну сторінку -->
+        <div class="property-card-footer">
+            <a href="<?php the_permalink(); ?>" class="btn-details">
+                View Details
+            </a>
+        </div>
+
     </div>
+
 </article>

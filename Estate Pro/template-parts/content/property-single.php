@@ -1,45 +1,51 @@
 <?php
-$offer_type = get_field( 'property_offer_type' );
+/**
+ * Property Single Content Layout
+ * Pushing all ACF variables into clean PHP logic.
+ */
+
+// 1. Зчитуємо прості текстові та числові поля
+$price      = get_field('property_price');
+$area       = get_field('property_area');
+$rooms      = get_field('property_rooms');
+$address    = get_field('property_address');
+$offer_type = get_field('property_offer_type'); // Поверне 'Rent' або 'Sale'
+
+// 2. Зчитуємо прапорець (True / False)
+$has_parking = get_field('property_has_parking'); // Поверне true або false
+
 ?>
 
-<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="back-to-catalog">← Назад до каталогу</a>
-
-<h1 class="single-property-title"><?php the_title(); ?></h1>
-
-<div class="single-property-image">
-    <?php
-    if ( has_post_thumbnail() ) {
-        the_post_thumbnail( 'large' );
-    } else {
-        echo '<img src="https://picsum.photos/1200/600?random=' . esc_attr( get_the_ID() ) . '" alt="' . esc_attr( get_the_title() ) . '">';
-    }
-    ?>
-</div>
-
-<div class="property-details-block">
-    <div class="details-specs">
-        <p class="spec-item address-item">📍 <?php the_field( 'property_address' ); ?></p>
-
-        <p class="spec-item price-item">
-            💰 <?php the_field( 'property_price' ); ?> $
-            <?php if ( $offer_type === 'Rent' ) : ?>
-                <span class="price-period">/ міс.</span>
-            <?php endif; ?>
-        </p>
-
-        <p class="spec-item">📐 Площа: <?php the_field( 'property_area' ); ?> м²</p>
-        <p class="spec-item">🛏️ Кімнат: <?php the_field( 'property_rooms' ); ?></p>
-        <p class="spec-item">
-            🚗 Паркінг:
-            <?php if ( get_field( 'property_has_parking' ) ) : ?>
-                <span class="parking-yes">✅ Є у наявності</span>
-            <?php else : ?>
-                <span class="parking-no">❌ Немає</span>
-            <?php endif; ?>
-        </p>
+<!-- ВЕРСТКА ХАРАКТЕРИСТИК -->
+<div class="property-features-box">
+    
+    <div class="feature-item">
+        <span>💰 Price:</span>
+        <strong><?php echo $price ? esc_html($price) . ' $' : 'Contact for price'; ?></strong>
     </div>
-</div>
 
-<div class="full-description">
-    <?php the_content(); ?>
+    <div class="feature-item">
+        <span>📐 Area:</span>
+        <strong><?php echo $area ? esc_html($area) . ' m²' : 'N/A'; ?></strong>
+    </div>
+
+    <div class="feature-item">
+        <span>🚪 Rooms:</span>
+        <strong><?php echo $rooms ? esc_html($rooms) : 'N/A'; ?></strong>
+    </div>
+
+    <!-- Обробка вибору Оренда/Продаж -->
+    <div class="feature-item">
+        <span>Label:</span>
+        <span class="badge badge-<?php echo esc_attr(strtolower($offer_type)); ?>">
+            <?php echo esc_html($offer_type); ?>
+        </span>
+    </div>
+
+    <!-- Обробка логічного поля (True/False) -->
+    <div class="feature-item">
+        <span>🚗 Parking:</span>
+        <strong><?php echo $has_parking ? '✅ Available' : '❌ None'; ?></strong>
+    </div>
+
 </div>
