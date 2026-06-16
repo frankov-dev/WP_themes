@@ -124,7 +124,7 @@ img {
 
 .property-card-content,
 .property-info {
-    padding-top: 12px;
+    padding-top: 8px;
 }
 
 .property-badge,
@@ -157,8 +157,8 @@ img {
 
 .property-card-title,
 .property-card .property-title {
-    margin: 0 0 6px 0;
-    font-size: 18px;
+    margin: 0 0 8px 0;
+    font-size: 20px;
     line-height: 1.2;
     color: var(--estate-text);
     white-space: nowrap;
@@ -178,15 +178,38 @@ img {
 
 .property-card-location,
 .property-card .property-address {
-    margin: 2px 0 10px 0;
+    margin: 0 0 10px 0;
     font-size: 13px;
     color: var(--estate-muted);
 }
 
-.property-card-specs {
-    display: grid;
-    gap: 8px;
-    margin-bottom: 14px;
+.property-card-price {
+    margin: 0 0 12px 0;
+    font-size: 24px;
+    font-weight: 800;
+    color: #202124;
+}
+
+.property-card-price-currency {
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+.property-card-price-period {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--estate-muted);
+}
+
+.property-card-specline {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #5f6368;
+}
+
+.property-card-footer {
+    margin-top: 10px;
 }
 
 .spec-row {
