@@ -1,6 +1,6 @@
 <?php
 
-function estate_pro_register_property_type() {
+function estate_pro_register_custom_post_types() {
     $args = array(
         'labels' => array(
             'name'          => 'Properties',
@@ -15,5 +15,23 @@ function estate_pro_register_property_type() {
     );
 
     register_post_type( 'property', $args );
+
+    $args = array(
+        'labels' => array(
+            'name'          => 'Agents',
+            'singular_name' => 'Agent',
+            'add_new'       => 'Add New Agent Profile',
+            'add_new_item'  => 'Enter Agent Name',
+            'edit_item'     => 'Edit Agent',
+        ),
+        'public'       => true,
+        'has_archive'   => true,
+        'menu_icon'     => 'dashicons-businessman',
+        'supports'      => array( 'title', 'thumbnail' ),
+        'show_in_rest'  => true,
+    );
+    register_post_type( 'agent', $args );
+
 }
-add_action( 'init', 'estate_pro_register_property_type' );
+
+add_action( 'init', 'estate_pro_register_custom_post_types' );
