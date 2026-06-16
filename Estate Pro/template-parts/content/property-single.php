@@ -14,7 +14,10 @@ $offer_type = get_field('property_offer_type'); // Поверне 'Rent' або 
 // 2. Зчитуємо прапорець (True / False)
 $has_parking = get_field('property_has_parking'); // Поверне true або false
 
+// 3. Зчитування агенту як об'єкта (Object) з ACF
+$agent = get_field('property_agent'); // Поверне об'єкт WP_User або null, якщо не призначено
 ?>
+
 
 <!-- ВЕРСТКА ХАРАКТЕРИСТИК -->
 <div class="property-features-box">
