@@ -8,30 +8,70 @@ Author: Frankov
 /* ==========================================================================
    1. ГЛОБАЛЬНЕ СКИДАННЯ ТА ШРИФТИ 
    ========================================================================== */
+:root {
+    --estate-bg: #F5F1EA;
+    --estate-header: #E7DED0;
+    --estate-accent: #8B5E3C;
+    --estate-text: #2D2D2D;
+    --estate-muted: #6f6256;
+    --estate-card-radius: 20px;
+    --estate-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    background-color: #f5f7fa;
-    color: #333333;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--estate-bg);
+    color: var(--estate-text);
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--estate-text);
+    margin-top: 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+p {
+    margin-top: 0;
+}
+
+a {
+    color: var(--estate-accent);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* ==========================================================================
    2. СТИЛІЗАЦІЯ ШАПКИ (HEADER) 
    ========================================================================== */
 .site-header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: var(--estate-header);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 18px 20px;
 }
 .site-logo {
     font-size: 24px;
     font-weight: 700;
-    color: #1a73e8;
+    color: var(--estate-text);
     text-decoration: none;
 }
 
@@ -40,13 +80,13 @@ body {
    ========================================================================== */
 .main-catalog {
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 48px auto;
     padding: 0 20px;
 }
 .catalog-title {
-    font-size: 28px;
-    color: #202124;
-    margin-bottom: 30px;
+    font-size: clamp(32px, 3vw, 40px);
+    color: var(--estate-text);
+    margin-bottom: 28px;
 }
 .properties-grid {
     display: grid;
@@ -58,50 +98,55 @@ body {
    4. СТИЛІЗАЦІЯ КАРТКИ (PROPERTY CARD) 
    ========================================================================== */
 .property-card {
-    background-color: #ffffff;
-    border-radius: 12px;
+    background: #ffffff;
+    border-radius: var(--estate-card-radius);
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    box-shadow: var(--estate-card-shadow);
+    padding: 24px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .property-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 .property-image img {
     width: 100%;
     height: 220px;
     object-fit: cover;
     display: block;
+    border-radius: 16px;
 }
 .property-info {
-    padding: 20px;
+    padding-top: 20px;
 }
 .property-title {
-    margin: 0 0 15px 0;
-    font-size: 18px;
-    color: #202124;
+    margin: 0 0 12px 0;
+    font-size: clamp(20px, 2vw, 24px);
+    line-height: 1.25;
+    color: var(--estate-text);
 }
 .property-link {
     display: block;
-    background-color: #1a73e8;
+    background-color: var(--estate-accent);
     color: #ffffff;
     text-align: center;
     padding: 12px;
     text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 .property-link:hover {
-    background-color: #1557b0;
+    background-color: #734c31;
+    transform: translateY(-1px);
 }
 
 /* ==========================================================================
    5. СТИЛІЗАЦІЯ ПІДВАЛУ (FOOTER) 
    ========================================================================== */
 .site-footer {
-    background-color: #202124;
-    color: #bdc1c6;
+    background-color: var(--estate-header);
+    color: var(--estate-text);
     text-align: center;
     padding: 20px 0;
     margin-top: 60px;
@@ -116,7 +161,7 @@ body {
     margin: 0 auto;
 }
 .back-to-catalog {
-    color: #2c3e50;
+    color: var(--estate-accent);
     text-decoration: none;
     font-weight: 600;
 }
@@ -124,24 +169,24 @@ body {
     text-decoration: underline;
 }
 .single-property-title {
-    font-size: 36px;
+    font-size: clamp(48px, 5vw, 64px);
     margin: 20px 0;
-    color: #202124;
+    color: var(--estate-text);
     line-height: 1.2;
 }
 .single-property-image img {
     width: 100%;
     height: 450px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: var(--estate-card-radius);
     display: block;
     margin-bottom: 30px;
 }
 .property-details-block {
     background: #ffffff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    padding: 24px;
+    border-radius: var(--estate-card-radius);
+    box-shadow: var(--estate-card-shadow);
     margin-bottom: 30px;
 }
 .details-specs {
@@ -150,27 +195,59 @@ body {
     gap: 12px;
 }
 .spec-item {
-    font-size: 18px;
+    font-size: clamp(16px, 1.6vw, 18px);
     margin: 0;
-    color: #333;
+    color: var(--estate-text);
 }
 .price-item {
-    color: #1a73e8;
+    color: var(--estate-accent);
     font-weight: bold;
-    font-size: 22px;
+    font-size: clamp(20px, 1.8vw, 24px);
 }
 .price-period {
-    font-size: 15px;
-    color: #7f8c8d;
+    font-size: 14px;
+    color: var(--estate-muted);
     font-weight: normal;
 }
-.parking-yes { color: #2ecc71; font-weight: bold; }
-.parking-no { color: #e74c3c; }
+.parking-yes { color: var(--estate-accent); font-weight: 700; }
+.parking-no { color: #b04b3f; }
 
 .full-description {
-    font-size: 18px;
+    font-size: clamp(16px, 1.6vw, 18px);
     line-height: 1.7;
-    color: #3f4043;
+    color: var(--estate-text);
+}
+
+.full-description h2,
+.full-description h3,
+.property-details-block h2,
+.property-details-block h3 {
+    font-size: clamp(32px, 3vw, 40px);
+}
+
+.property-card .badge {
+    border-radius: 999px !important;
+    padding: 6px 10px !important;
+}
+
+.property-card hr {
+    border-top: 1px solid rgba(45, 45, 45, 0.08) !important;
+}
+
+.property-card .property-address,
+.property-card .property-meta {
+    color: var(--estate-muted) !important;
+}
+
+.property-card .property-meta strong {
+    color: var(--estate-text) !important;
+}
+
+.agent-card {
+    background: #ffffff;
+    border-radius: var(--estate-card-radius);
+    box-shadow: var(--estate-card-shadow);
+    padding: 24px;
 }
 
 /* ==========================================================================
@@ -183,11 +260,16 @@ body {
     }
 }
 @media (max-width: 768px) {
+    .main-catalog,
+    .single-property-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     .properties-grid {
         grid-template-columns: 1fr;
     }
     .single-property-title {
-        font-size: 28px;
+        font-size: clamp(40px, 9vw, 48px);
     }
     .single-property-image img {
         height: 250px;
