@@ -12,3 +12,9 @@ function estate_pro_theme_setup() {
     add_theme_support( 'title-tag' );
 }
 add_action( 'after_setup_theme', 'estate_pro_theme_setup' );
+
+function estate_pro_acf_google_map_api( $api ) {
+    $api['key'] = GOOGLE_MAPS_API_KEY; 
+    return $api;
+}
+add_filter('acf/fields/google_map/api', 'estate_pro_acf_google_map_api');
