@@ -13,6 +13,7 @@ $address             = get_field( 'property_full_address' );
 $short_address       = get_field( 'property_short_address' );
 $agent_post          = get_field( 'property_agent' ); // Об'єкт зв'язаного поста Агента
 $property_features   = get_field( 'property_features' );
+$property_gallery    = get_field( 'property_gallery' );
 
 if ( ! $short_address && $address ) {
     $address_parts   = array_filter( array_map( 'trim', explode( ',', $address ) ) );
@@ -85,13 +86,52 @@ $clean_phone = $agent_phone ? preg_replace( '/[^0-9+]/', '', $agent_phone ) : ''
     </div>
 <div class="property-grid-layout">
     <div class="property-left-column">
-        <section class="property-hero-image">
-            <?php if ( has_post_thumbnail() ) : ?>
-                <?php the_post_thumbnail( 'large' ); ?>
+        <div class="property-gallery-wrapper">
+            <?php 
+            $gallery_images = array();
+            if ( $property_gallery ) {
+                if ( is_array( $property_gallery ) ) {
+                    $gallery_images = $property_gallery;
+                } else {
+                    $gallery_images = array( $property_gallery );
+                }
+            }
+            
+            if ( ! empty( $gallery_images ) ) : ?>
+                <div class="gallery-slider">
+                    <div class="gallery-track">
+                        <?php foreach ( $gallery_images as $index => $image ) : ?>
+                            <div class="gallery-slide" data-index="<?php echo esc_attr( $index ); ?>">
+                                <?php 
+                                if ( is_array( $image ) && isset( $image['ID'] ) ) {
+                                    echo wp_get_attachment_image( $image['ID'], 'large' );
+                                } elseif ( is_numeric( $image ) ) {
+                                    echo wp_get_attachment_image( $image, 'large' );
+                                } else {
+                                    echo '<img src="' . esc_url( $image ) . '" alt="Gallery Image">';
+                                }
+                                ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    
+                    <?php if ( count( $gallery_images ) > 1 ) : ?>
+                        <button class="gallery-btn gallery-btn-prev" aria-label="Previous">&lt;</button>
+                        <button class="gallery-btn gallery-btn-next" aria-label="Next">&gt;</button>
+                        
+                        <div class="gallery-dots">
+                            <?php foreach ( $gallery_images as $index => $image ) : ?>
+                                <button class="gallery-dot <?php echo $index === 0 ? 'active' : ''; ?>" data-index="<?php echo esc_attr( $index ); ?>"></button>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
             <?php else : ?>
-                <img src="https://placehold.co/1400x900/eef2f5/7f8c8d?text=No+Image" alt="No Image">
+                <section class="property-hero-image">
+                    <img src="https://placehold.co/1400x900/eef2f5/7f8c8d?text=No+Image" alt="No Image">
+                </section>
             <?php endif; ?>
-        </section>
+        </div>
     </div>
 
     <aside class="property-right-column">

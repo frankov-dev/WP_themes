@@ -839,6 +839,105 @@ img {
 }
 
 /* ==========================================================================
+   Gallery Slider Styles
+   ========================================================================== */
+.property-gallery-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.gallery-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #f5f1ea;
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-slide {
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(139, 94, 60, 0.85);
+    color: #fff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+    font-weight: 700;
+}
+
+.gallery-btn:hover {
+    background: rgba(139, 94, 60, 0.98);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.gallery-btn-prev {
+    left: 16px;
+}
+
+.gallery-btn-next {
+    right: 16px;
+}
+
+.gallery-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.gallery-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.gallery-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.gallery-dot.active {
+    background: #fff;
+    transform: scale(1.2);
+}
+
+/* ==========================================================================
    7. АДАПТИВНІСТЬ (RESPONSIVE DESIGN) 
    ========================================================================== */
 @media (max-width: 992px) {
