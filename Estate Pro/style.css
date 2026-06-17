@@ -512,6 +512,15 @@ img {
     margin-top: 6px;
     font-size: 14px;
     color: #7f7265;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+    cursor: pointer;
+}
+
+.property-location-full:hover {
+    color: #8b5e3c;
+    text-decoration: underline;
 }
 
 .property-specs-line {
