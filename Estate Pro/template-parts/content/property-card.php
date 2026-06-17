@@ -9,7 +9,7 @@ $area        = get_field( 'property_area' );
 $rooms       = get_field( 'property_rooms' );
 $offer_type  = get_field( 'property_offer_type' ); // Rent або Sale
 $has_parking = get_field( 'property_has_parking' ); // True/False
-$address     = get_field( 'property_address' );
+$address     = get_field( 'property_short_address' );
 
 $specs = array_filter(
     array(
@@ -18,7 +18,7 @@ $specs = array_filter(
         $has_parking ? 'Parking ✓' : '',
     )
 );
-
+    
 $spec_line = $specs ? implode( ' • ', $specs ) : 'No specs available';
 ?>
 
@@ -43,9 +43,13 @@ $spec_line = $specs ? implode( ' • ', $specs ) : 'No specs available';
             <a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php the_title(); ?></a>
         </h3>
 
-        <?php if ( $address ) : ?>
-            <p class="property-card-location">📍 <?php echo esc_html( $address ); ?></p>
-        <?php endif; ?>
+        <div class="property-card-location">
+            <?php if ( $address ) : ?>
+                <span class="property-card-location"><?php echo esc_html( $address ); ?></span>
+            <?php else : ?>
+                <span class="property-card-location">Location not specified</span>
+            <?php endif; ?>
+        </div>
 
         <div class="property-card-price">
             <?php if ( $price ) : ?>
