@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <main class="main-catalog">
-    <h1 class="catalog-title">Наші пропозиції</h1>
+    <h1 class="catalog-title">Our Properties</h1>
 
     <div class="properties-grid">
         <?php
@@ -19,7 +19,7 @@
             endwhile;
             wp_reset_postdata(); 
         else : 
-            echo '<p class="no-posts">Оговорених об\'єктів не знайдено.</p>';
+            echo '<p class="no-posts">No properties found.</p>';
         endif;
         ?>
 
