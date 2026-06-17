@@ -4,19 +4,33 @@
  * Simplified version: text address with direct Google Maps link & CPT Agent support.
  */
 
-$price       = get_field( 'property_price' );
-$area        = get_field( 'property_area' );
-$rooms       = get_field( 'property_rooms' );
-$address     = get_field( 'property_address' ); // Очікує звичайний Text від ACF
-$offer_type  = get_field( 'property_offer_type' );
-$has_parking = get_field( 'property_has_parking' );
-$agent_post  = get_field( 'property_agent' ); // Об'єкт зв'язаного поста Агента
+$price                = get_field( 'property_price' );
+$area                = get_field( 'property_area' );
+$rooms               = get_field( 'property_rooms' );
+$offer_type          = get_field( 'property_offer_type' );
+$has_parking         = get_field( 'property_has_parking' );
+$address             = get_field( 'property_full_address' );  
+$short_address       = get_field( 'property_short_address' );
+$agent_post          = get_field( 'property_agent' ); // Об'єкт зв'язаного поста Агента
+$property_features   = get_field( 'property_features' );
 
-// ГЕНЕРАЦІЯ ОФІЦІЙНОГО БЕЗКОШТОВНОГО ПОСИЛАННЯ НА GOOGLE MAPS
-$google_maps_url = '';
-if ( $address ) {
-    $google_maps_url = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( trim( (string) $address ) );
+if ( ! $short_address && $address ) {
+    $address_parts   = array_filter( array_map( 'trim', explode( ',', $address ) ) );
+    $short_address   = $address_parts ? $address_parts[0] : $address;
 }
+
+$status_text = ( $offer_type === 'Rent' ) ? 'For Rent' : 'For Sale';
+
+$specs = array_filter(
+    array(
+        $area ? esc_html( $area ) . ' m²' : '',
+        $rooms ? esc_html( $rooms ) . ' rooms' : '',
+        $has_parking ? 'Parking' : '',
+    )
+);
+    
+$spec_line = $specs ? implode( ' • ', $specs ) : 'No specs available';
+
 
 // ДАНІ АГЕНТА (Зчитуємо з іншого поста за ID)
 $agent_name   = get_the_author_meta( 'display_name' );
@@ -42,81 +56,40 @@ $clean_phone = $agent_phone ? preg_replace( '/[^0-9+]/', '', $agent_phone ) : ''
 <a class="back-btn back-to-catalog" href="<?php echo esc_url( home_url( '/' ) ); ?>">← Back to Catalog</a>
 
 <div class="property-heading-header">
-    <h1 class="property-main-title"><?php the_title(); ?></h1>
-    <?php if ( $offer_type ) : ?>
-        <span class="pro-status-badge status-<?php echo strtolower( esc_attr( $offer_type ) ); ?>">
-            For <?php echo esc_html( $offer_type ); ?>
-        </span>
-    <?php endif; ?>
-</div>
+        <h1 class="property-main-title"><?php the_title(); ?></h1>
 
-<div class="property-hero-image">
-    <?php if ( has_post_thumbnail() ) : ?>
-        <?php the_post_thumbnail( 'large' ); ?>
-    <?php else : ?>
-        <img src="https://placehold.co/1400x900/eef2f5/7f8c8d?text=No+Image" alt="No Image">
-    <?php endif; ?>
-</div>
+        <div class="property-price-row">
+            <p class="property-price">
+                <?php if ( $price ) : ?>
+                    <span class="property-price-value"><?php echo esc_html( $price ); ?></span><span class="property-price-currency">$</span>
+                    <?php if ( $offer_type === 'Rent' ) : ?><span class="property-price-period"> / міс</span><?php endif; ?>
+                <?php else : ?>
+                    Contact for price
+                <?php endif; ?>
+            </p>
+            <?php if ( $status_text ) : ?>
+                <span class="property-status-badge"><?php echo esc_html( $status_text ); ?></span>
+            <?php endif; ?>
+        </div>
 
-<div class="property-grid-layout">
-    
-    <div class="property-left-column">
-        
-        <section class="specs-card-box">
-            <div class="spec-grid-item">
-                <div class="spec-icon">💰</div>
-                <div>
-                    <span class="spec-title">Price</span>
-                    <div class="spec-value">
-                        <?php echo $price ? esc_html( $price ) . ' $' : 'Contact for price'; ?>
-                        <?php echo ( $offer_type === 'Rent' ) ? ' / mo' : ''; ?>
-                    </div>
-                </div>
-            </div>
-
-            <div class="spec-grid-item">
-                <div class="spec-icon">📐</div>
-                <div>
-                    <span class="spec-title">Area</span>
-                    <div class="spec-value"><?php echo $area ? esc_html( $area ) . ' m²' : 'N/A'; ?></div>
-                </div>
-            </div>
-
-            <div class="spec-grid-item">
-                <div class="spec-icon">🛏️</div>
-                <div>
-                    <span class="spec-title">Rooms</span>
-                    <div class="spec-value"><?php echo $rooms ? esc_html( $rooms ) : 'N/A'; ?></div>
-                </div>
-            </div>
-
-            <div class="spec-grid-item">
-                <div class="spec-icon">🚗</div>
-                <div>
-                    <span class="spec-title">Parking</span>
-                    <div class="spec-value"><?php echo $has_parking ? 'Available' : 'None'; ?></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="property-details-block">
-            <h2>Description</h2>
-            <div class="full-description">
-                <?php the_content(); ?>
-            </div>
-        </section>
-
+        <!-- <?php if ( $short_address ) : ?>
+            <p class="property-location-short"><?php echo esc_html( $short_address ); ?></p>
+        <?php endif; ?> -->
         <?php if ( $address ) : ?>
-            <section class="property-map-wrapper">
-                <h2>Location</h2>
-                <p class="map-address-text">🏢 <strong>Address:</strong> <?php echo esc_html( $address ); ?></p>
-                
-                <a class="agent-btn phone-btn" href="<?php echo esc_url( $google_maps_url ); ?>" target="_blank" rel="noopener noreferrer">
-                    🗺️ Open in Google Maps
-                </a>
-            </section>
+            <p class="property-location-full">📍 <?php echo esc_html( $address ); ?></p>
         <?php endif; ?>
-        
+
+        <p class="property-specs-line"><?php echo esc_html( $spec_line ); ?></p>
+    </div>
+<div class="property-grid-layout">
+    <div class="property-left-column">
+        <section class="property-hero-image">
+            <?php if ( has_post_thumbnail() ) : ?>
+                <?php the_post_thumbnail( 'large' ); ?>
+            <?php else : ?>
+                <img src="https://placehold.co/1400x900/eef2f5/7f8c8d?text=No+Image" alt="No Image">
+            <?php endif; ?>
+        </section>
     </div>
 
     <aside class="property-right-column">
@@ -130,16 +103,49 @@ $clean_phone = $agent_phone ? preg_replace( '/[^0-9+]/', '', $agent_phone ) : ''
 
             <div class="agent-sidebar-contacts">
                 <?php if ( $clean_phone ) : ?>
-                    <a class="agent-btn phone-btn" href="tel:<?php echo esc_attr( $clean_phone ); ?>">📞 Call Agent</a>
-                    <a class="agent-btn telegram-btn" href="https://t.me/<?php echo esc_attr( str_replace('+', '', $clean_phone) ); ?>" target="_blank" style="background: #e0f2fe; color: #0369a1;">💬 Telegram</a>
-                    <a class="agent-btn whatsapp-btn" href="https://wa.me/<?php echo esc_attr( $clean_phone ); ?>" target="_blank" style="background: #dcfce7; color: #15803d;">🟢 WhatsApp</a>
+                    <a class="agent-btn agent-btn-primary phone-btn" href="tel:<?php echo esc_attr( $clean_phone ); ?>">
+                        <span class="service-icon">📞</span> Call Agent
+                    </a>
                 <?php endif; ?>
 
                 <?php if ( $agent_email ) : ?>
-                    <a class="agent-btn email-btn" href="mailto:<?php echo esc_attr( $agent_email ); ?>">✉️ Email Agent</a>
+                    <a class="agent-btn agent-btn-secondary email-btn" href="mailto:<?php echo esc_attr( $agent_email ); ?>">
+                        <span class="service-icon">✉️</span> Email Agent
+                    </a>
                 <?php endif; ?>
             </div>
         </div>
     </aside>
-    
 </div>
+
+<?php 
+if ( is_string( $property_features ) ) {
+    $property_features = array_filter( array_map( 'trim', preg_split( '/[\r\n]+/', $property_features ) ) );
+}
+
+if ( ! is_array( $property_features ) || empty( $property_features ) ) {
+    $property_features = array( 'Property Feature is not specified' );
+}
+
+$property_features = array_map( 'ucwords', $property_features );
+?>
+
+<section class="property-features-box">
+    <div class="property-features-grid">
+        <div class="features-description">
+            <h2>Description</h2>
+            <div class="feature-description-text">
+                <?php ob_start(); the_content(); echo ob_get_clean(); ?>
+            </div>
+        </div>
+
+        <div class="features-list-column">
+            <h2>Features</h2>
+            <div class="features-list-chips">
+                <?php foreach ( $property_features as $feature ) : ?>
+                    <span class="feature-chip">✓ <?php echo esc_html( $feature ); ?></span>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</section>

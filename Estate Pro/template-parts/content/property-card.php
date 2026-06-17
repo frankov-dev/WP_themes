@@ -15,7 +15,7 @@ $specs = array_filter(
     array(
         $area ? esc_html( $area ) . ' m²' : '',
         $rooms ? esc_html( $rooms ) . ' rooms' : '',
-        $has_parking ? 'Parking ✓' : '',
+        $has_parking ? 'Parking' : '',
     )
 );
     
