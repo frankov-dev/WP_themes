@@ -21,7 +21,7 @@ function estate_pro_register_custom_post_types() {
             'name'          => 'Agents',
             'singular_name' => 'Agent',
             'add_new'       => 'Add New Agent Profile',
-            'add_new_item'  => 'Enter Agent Name',
+            'add_new_item'  => 'Add New Agent Profile',
             'edit_item'     => 'Edit Agent',
         ),
         'public'       => true,
