@@ -210,37 +210,6 @@ img {
 
 .property-card-footer {
     margin-top: 10px;
-}
-
-.spec-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    align-items: baseline;
-    font-size: 14px;
-}
-
-.spec-label {
-    color: var(--estate-muted);
-    font-weight: 600;
-}
-
-.spec-value {
-    color: var(--estate-text);
-    font-weight: 700;
-    text-align: right;
-}
-
-.price-value {
-    color: var(--estate-accent);
-}
-
-.price-value small {
-    color: var(--estate-muted);
-    font-weight: 600;
-}
-
-.property-card-footer {
     display: flex;
     justify-content: flex-start;
 }
@@ -280,11 +249,6 @@ img {
 /* ==========================================================================
    6. СТОРІНКА ОДНОГО ОБ'ЄКТА (SINGLE PROPERTY)
    ========================================================================== */
-.single-property-container {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
 .back-to-catalog {
     color: var(--estate-accent);
     text-decoration: none;
@@ -418,7 +382,7 @@ img {
 }
 
 /* ==========================================================================
-   9. Detailed Property Page Layout
+   7. Detailed Property Page Layout
    ========================================================================== */
 .single-property-wrapper {
     max-width: 1200px;
@@ -580,34 +544,6 @@ img {
     background: #f8fafc;
     padding: 12px;
     border-radius: 14px;
-}
-
-.specs-card-box .spec-title {
-    display: block;
-    font-size: 12px;
-    color: #7f8c8d;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.specs-card-box .spec-value {
-    font-size: 16px;
-    font-weight: 700;
-    color: #202124;
-    text-align: left;
-}
-
-.spec-grid-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.spec-icon {
-    font-size: 24px;
-    background: #f1f5f9;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .specs-card-box .spec-title {
@@ -938,7 +874,7 @@ img {
 }
 
 /* ==========================================================================
-   7. АДАПТИВНІСТЬ (RESPONSIVE DESIGN) 
+   8. АДАПТИВНІСТЬ (RESPONSIVE DESIGN) 
    ========================================================================== */
 @media (max-width: 992px) {
     .properties-grid {

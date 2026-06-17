@@ -44,11 +44,7 @@ $spec_line = $specs ? implode( ' • ', $specs ) : 'No specs available';
         </h3>
 
         <div class="property-card-location">
-            <?php if ( $address ) : ?>
-                <span class="property-card-location"><?php echo esc_html( $address ); ?></span>
-            <?php else : ?>
-                <span class="property-card-location">Location not specified</span>
-            <?php endif; ?>
+            <?php echo $address ? esc_html( $address ) : 'Location not specified'; ?>
         </div>
 
         <div class="property-card-price">

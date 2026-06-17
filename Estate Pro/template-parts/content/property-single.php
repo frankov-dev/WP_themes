@@ -73,9 +73,7 @@ $clean_phone = $agent_phone ? preg_replace( '/[^0-9+]/', '', $agent_phone ) : ''
             <?php endif; ?>
         </div>
 
-        <!-- <?php if ( $short_address ) : ?>
-            <p class="property-location-short"><?php echo esc_html( $short_address ); ?></p>
-        <?php endif; ?> -->
+
         <?php if ( $address ) : ?>
             <a class="property-location-full" href="https://maps.google.com/?q=<?php echo urlencode( esc_attr( $address ) ); ?>" target="_blank" rel="noopener noreferrer">
                 📍 <?php echo esc_html( $address ); ?>
@@ -177,7 +175,7 @@ $property_features = array_map( 'ucwords', $property_features );
         <div class="features-description">
             <h2>Description</h2>
             <div class="feature-description-text">
-                <?php ob_start(); the_content(); echo ob_get_clean(); ?>
+                <?php the_content(); ?>
             </div>
         </div>
 

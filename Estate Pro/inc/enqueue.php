@@ -1,9 +1,10 @@
 <?php
 
 function estate_pro_enqueue_assets() {
+    $theme_version = wp_get_theme()->get( 'Version' );
     wp_enqueue_style( 'estate-pro-fonts', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap', array(), null );
-    wp_enqueue_style( 'estate-pro-style', get_stylesheet_uri(), array( 'estate-pro-fonts' ), '1.0' );
-    wp_enqueue_script( 'estate-pro-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0', true );
+    wp_enqueue_style( 'estate-pro-style', get_stylesheet_uri(), array( 'estate-pro-fonts' ), $theme_version );
+    wp_enqueue_script( 'estate-pro-main', get_template_directory_uri() . '/assets/js/main.js', array(), $theme_version, true );
 }
 add_action( 'wp_enqueue_scripts', 'estate_pro_enqueue_assets' );
 
