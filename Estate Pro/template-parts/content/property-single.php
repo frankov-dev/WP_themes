@@ -103,13 +103,13 @@ $clean_phone = $agent_phone ? preg_replace( '/[^0-9+]/', '', $agent_phone ) : ''
 
             <div class="agent-sidebar-contacts">
                 <?php if ( $clean_phone ) : ?>
-                    <a class="agent-btn agent-btn-primary phone-btn" href="tel:<?php echo esc_attr( $clean_phone ); ?>">
+                    <a class="agent-btn agent-btn-primary phone-btn" href="tel:<?php echo esc_attr( $clean_phone ); ?>" data-phone="<?php echo esc_attr( $agent_phone ); ?>">
                         <span class="service-icon">📞</span> Call Agent
                     </a>
                 <?php endif; ?>
 
                 <?php if ( $agent_email ) : ?>
-                    <a class="agent-btn agent-btn-secondary email-btn" href="mailto:<?php echo esc_attr( $agent_email ); ?>">
+                    <a class="agent-btn agent-btn-secondary email-btn" href="mailto:<?php echo esc_attr( $agent_email ); ?>" data-email="<?php echo esc_attr( $agent_email ); ?>">
                         <span class="service-icon">✉️</span> Email Agent
                     </a>
                 <?php endif; ?>

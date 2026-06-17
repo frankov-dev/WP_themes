@@ -735,6 +735,100 @@ img {
     font-size: 16px;
 }
 
+.phone-btn {
+    position: relative;
+}
+
+.phone-btn::before {
+    content: attr(data-phone);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(61, 47, 36, 0.95);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+.phone-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(61, 47, 36, 0.95);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    margin-bottom: 0;
+}
+
+.phone-btn:hover::before,
+.phone-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.email-btn {
+    position: relative;
+}
+
+.email-btn::before {
+    content: attr(data-email);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(61, 47, 36, 0.95);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+    max-width: 200px;
+    word-break: break-all;
+}
+
+.email-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(61, 47, 36, 0.95);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    margin-bottom: 0;
+}
+
+.email-btn:hover::before,
+.email-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* ==========================================================================
    7. АДАПТИВНІСТЬ (RESPONSIVE DESIGN) 
    ========================================================================== */
